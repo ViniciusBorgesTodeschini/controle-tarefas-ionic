@@ -1,0 +1,7 @@
+{
+  "name": "controle-tarefas",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
