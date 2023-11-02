@@ -22,6 +22,14 @@ const routes: Routes = [
   {
     path: 'atendimento-meio',
     loadChildren: () => import('./atendimento/atendimento-meio/atendimento-meio-routing.module').then( m => m.AtendimentoMeioPageRoutingModule)
+  },  
+  {
+    path: 'departamento',
+    loadChildren: () => import('./departamento/departamento-routing.module').then( m => m.DepartamentoPageRoutingModule)
+  },  
+  {
+    path: 'cidade',
+    loadChildren: () => import('./cidade/cidade-routing.module').then( m => m.CidadePageRoutingModule)
   }
 ];
 
