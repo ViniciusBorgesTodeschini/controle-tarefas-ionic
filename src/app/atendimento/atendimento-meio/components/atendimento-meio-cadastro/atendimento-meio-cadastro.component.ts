@@ -2,66 +2,60 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { AutorInterface } from '../../types/atendimento-meio.interface';
-import { AutorService } from '../../services/autor.service';
-import { GeneroEnum } from '../../types/genero.enum';
+import { AtendimentoMeioInterface } from '../../types/atendimento-meio.interface';
+import { AtendimentoMeioService } from '../../services/atendimento-meio.service';
 
 @Component({
-  selector: 'app-autores-cadastro',
-  templateUrl: './autores-cadastro.component.html',
-  styleUrls: ['./autores-cadastro.component.scss'],
+  selector: 'app-atendimento-meio-cadastro',
+  templateUrl: './atendimento-meio-cadastro.component.html',
+  styleUrls: ['./atendimento-meio-cadastro.component.scss'],
 })
-export class AutoresCadastroComponent implements OnInit {
-  autorId: number | null;
-  autoresForm: FormGroup;
+export class AtendimentoMeioCadastroComponent implements OnInit {
+  atendimentoMeioId: number | null;
+  atendimentoMeioForm: FormGroup;
 
   constructor(
     private toastController: ToastController,
     private activatedRoute: ActivatedRoute,
-    private autorService: AutorService,
+    private atendimentoMeioService: AtendimentoMeioService,
     private router: Router
   ) {
-    this.autorId = null;
-    this.autoresForm = this.createForm();
+    this.atendimentoMeioId = null;
+    this.atendimentoMeioForm = this.createForm();
   }
 
   ngOnInit() {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id) {
-      this.autorId = parseInt(id);
-      this.autorService.getAutor(this.autorId).subscribe((autor) => {
-        this.autoresForm = this.createForm(autor);
+      this.atendimentoMeioId = parseInt(id);
+      this.atendimentoMeioService.getAtendimentoMeio(this.atendimentoMeioId).subscribe((antendimentoMeio) => {
+        this.atendimentoMeioForm = this.createForm(antendimentoMeio);
       });
     }
   }
 
-  private createForm(autor?: AutorInterface) {
+  private createForm(meio?: AtendimentoMeioInterface) {
     return new FormGroup({
-      nome: new FormControl(autor?.nome || '', [
+      nome: new FormControl(meio?.nome || '', [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(150),
-      ]),
-      dataNascimento: new FormControl(autor?.dataNascimento || new Date().toISOString()),
-      genero: new FormControl(
-        autor?.genero || GeneroEnum.FEMININO,
-        Validators.required
-      ),
+      ])
     });
   }
 
   salvar() {
-    const autor: AutorInterface = {
-      ...this.autoresForm.value,
-      id: this.autorId,
+    const meio: AtendimentoMeioInterface = {
+      ...this.atendimentoMeioForm.value,
+      id: this.atendimentoMeioId,
     };
-    this.autorService.salvar(autor).subscribe(
-      () => this.router.navigate(['autores']),
+    this.atendimentoMeioService.salvar(meio).subscribe(
+      () => this.router.navigate(['atendimento-meios']),
       (erro) => {
         console.error(erro);
         this.toastController
           .create({
-            message: `Não foi possível salvar o autor ${autor.nome}`,
+            message: `Não foi possível salvar o meio de atendimento ${meio.nome}`,
             duration: 5000,
             keyboardClose: true,
             color: 'danger',
@@ -72,6 +66,6 @@ export class AutoresCadastroComponent implements OnInit {
   }
 
   get nome() {
-    return this.autoresForm.get('nome');
+    return this.atendimentoMeioForm.get('nome');
   }
 }

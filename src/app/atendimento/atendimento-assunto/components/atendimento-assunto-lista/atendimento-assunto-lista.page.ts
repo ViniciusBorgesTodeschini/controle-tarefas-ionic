@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
-import { AtendimentoMeioInterface } from '../../types/atendimento-meio.interface';
-import { AtendimentoMeioService } from '../../services/atendimento-meio.service';
+import { AtendimentoAssuntoInterface } from '../../types/atendimento-assunto.interface';
+import { AtendimentoAssuntoService } from '../../services/atendimento-assunto.service';
 
 @Component({
-  selector: 'app-atendimento-meio',
-  templateUrl: './atendimento-meio-lista.page.html',
-  styleUrls: ['./atendimento-meio-lista.page.scss'],
+  selector: 'app-atendimento-assunto',
+  templateUrl: './atendimento-assunto-lista.page.html',
+  styleUrls: ['./atendimento-assunto-lista.page.scss'],
 })
-export class AtendimentoMeioPage implements OnInit {
-  meios: AtendimentoMeioInterface[] = [];
+export class AtendimentoAssuntoPage implements OnInit {
+  assuntos: AtendimentoAssuntoInterface[] = [];
 
   constructor(
     private alertController: AlertController,
     private toastController: ToastController,
-    private atendimentoMeioService: AtendimentoMeioService
+    private atendimentoAssuntoService: AtendimentoAssuntoService
   ) {}
 
   ionViewWillEnter() {
@@ -37,9 +37,9 @@ export class AtendimentoMeioPage implements OnInit {
   ngOnInit() {}
 
   listar() {
-    this.atendimentoMeioService.getAtendimentosMeios().subscribe(
+    this.atendimentoAssuntoService.getAtendimentosAssuntos().subscribe(
       (dados) => {
-        this.meios = dados;
+        this.assuntos = dados;
       },
       (erro) => {
         console.error(erro);
@@ -47,15 +47,15 @@ export class AtendimentoMeioPage implements OnInit {
     );
   }
 
-  confirmarExclusao(meio: AtendimentoMeioInterface) {
+  confirmarExclusao(assunto: AtendimentoAssuntoInterface) {
     this.alertController
       .create({
         header: 'Confirmação de exclusão',
-        message: `Deseja excluir o assunto ${meio.nome}?`,
+        message: `Deseja excluir o assunto ${assunto.nome}?`,
         buttons: [
           {
             text: 'Sim',
-            handler: () => this.excluir(meio),
+            handler: () => this.excluir(assunto),
           },
           {
             text: 'Não',
@@ -65,15 +65,15 @@ export class AtendimentoMeioPage implements OnInit {
       .then((alerta) => alerta.present());
   }
 
-  private excluir(meio: AtendimentoMeioInterface) {
-    if (meio.id) {
-      this.atendimentoMeioService.excluir(meio.id).subscribe(
+  private excluir(assunto: AtendimentoAssuntoInterface) {
+    if (assunto.id) {
+      this.atendimentoAssuntoService.excluir(assunto.id).subscribe(
         () => this.listar(),
         (erro) => {
           console.error(erro);
           this.toastController
             .create({
-              message: `Não foi possível excluir o assunto ${meio.nome}`,
+              message: `Não foi possível excluir o assunto ${assunto.nome}`,
               duration: 5000,
               keyboardClose: true,
               color: 'danger',

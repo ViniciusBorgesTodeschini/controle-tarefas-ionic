@@ -3,19 +3,19 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Meios de atendimento</ion-title>
+    <ion-title>Assuntos de atendimento</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let meio of meios">
-      <ion-label>{{meio.nome}}</ion-label>
+    <ion-item *ngFor="let assunto of assuntos">
+      <ion-label>{{assunto.nome}}</ion-label>
       <ion-buttons>
-        <ion-button color="primary" [routerLink]="['edicao', meio.id]">
+        <ion-button color="primary" [routerLink]="['edicao', assunto.id]">
           <!--<ion-icon name="create" slot="icon-only"></ion-icon> -->
         </ion-button>
-        <ion-button color="primary" (click)="confirmarExclusao(meio)">
+        <ion-button color="primary" (click)="confirmarExclusao(assunto)">
           <!--<ion-icon name="trash"  slot="icon-only"></ion-icon>-->
         </ion-button>
       </ion-buttons>

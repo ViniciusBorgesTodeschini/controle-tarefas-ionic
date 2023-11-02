@@ -1,8 +1,4 @@
-import { GeneroEnum } from './genero.enum';
-
-export interface AutorInterface {
+export interface AtendimentoMeioInterface {
   id?: number | null;
   nome: string;
-  dataNascimento: Date;
-  genero: GeneroEnum;
 }
