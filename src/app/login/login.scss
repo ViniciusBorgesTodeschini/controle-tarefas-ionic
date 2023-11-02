@@ -1,0 +1,24 @@
+.container {
+    margin-top: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.container label {
+    margin-bottom: 0.3rem;
+}
+
+.container div {
+    margin-top: 2rem;
+    align-self: center;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.button {
+    width: 10rem;
+}
