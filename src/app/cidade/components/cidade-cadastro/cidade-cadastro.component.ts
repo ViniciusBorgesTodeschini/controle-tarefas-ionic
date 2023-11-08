@@ -8,8 +8,8 @@ import { EstadoEnum } from '../../types/estado.enum';
 
 @Component({
   selector: 'app-cidades-cadastro',
-  templateUrl: './cidades-cadastro.component.html',
-  styleUrls: ['./cidades-cadastro.component.scss'],
+  templateUrl: './cidade-cadastro.component.html',
+  styleUrls: ['./cidade-cadastro.component.scss']
 })
 export class CidadesCadastroComponent implements OnInit {
   cidadeId: number | null;

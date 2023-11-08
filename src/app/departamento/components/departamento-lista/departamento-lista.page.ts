@@ -6,7 +6,7 @@ import { DepartamentoService } from '../../services/departamento.service';
 @Component({
   selector: 'app-departamento',
   templateUrl: './departamento-lista.page.html',
-  styleUrls: ['./departamento-lista.page.scss'],
+  styleUrls: ['./departamento-lista.page.scss']
 })
 export class DepartamentoPage implements OnInit {
   departamentos: DepartamentoInterface[] = [];

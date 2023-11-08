@@ -8,7 +8,7 @@ import { AtendimentoMeioService } from '../../services/atendimento-meio.service'
 @Component({
   selector: 'app-atendimento-meio-cadastro',
   templateUrl: './atendimento-meio-cadastro.component.html',
-  styleUrls: ['./atendimento-meio-cadastro.component.scss'],
+  styleUrls: ['./atendimento-meio-cadastro.component.scss']
 })
 export class AtendimentoMeioCadastroComponent implements OnInit {
   atendimentoMeioId: number | null;

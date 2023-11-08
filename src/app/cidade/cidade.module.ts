@@ -17,7 +17,7 @@ import { CidadesCadastroComponent } from './components/cidade-cadastro/cidade-ca
     CommonModule,
     IonicModule,
     CidadePageRoutingModule,
-    HttpClientModule,
+    HttpClientModule
   ],
   declarations: [CidadesPage, CidadesCadastroComponent]
 })

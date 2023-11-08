@@ -8,8 +8,9 @@ import { AtendimentoAssuntoService } from '../../services/atendimento-assunto.se
 @Component({
   selector: 'app-atendimento-assunto-cadastro',
   templateUrl: './atendimento-assunto-cadastro.component.html',
-  styleUrls: ['./atendimento-assunto-cadastro.component.scss'],
+  styleUrls: ['./atendimento-assunto-cadastro.component.scss']
 })
+
 export class AtendimentoAssuntoCadastroComponent implements OnInit {
   atendimentoAssuntoId: number | null;
   atendimentoAssuntoForm: FormGroup;
