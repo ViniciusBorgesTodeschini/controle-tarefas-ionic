@@ -17,19 +17,19 @@ const routes: Routes = [
   },
   {
     path: 'atendimento-assunto',
-    loadChildren: () => import('./atendimento/atendimento-assunto/atendimento-assunto-routing.module').then( m => m.AtendimentoAssuntoPageRoutingModule)
+    loadChildren: () => import('./atendimento/atendimento-assunto/atendimento-assunto.module').then( m => m.AtendimentoAssuntoPageModule)
   },  
   {
     path: 'atendimento-meio',
-    loadChildren: () => import('./atendimento/atendimento-meio/atendimento-meio-routing.module').then( m => m.AtendimentoMeioPageRoutingModule)
+    loadChildren: () => import('./atendimento/atendimento-meio/atendimento-meio.module').then( m => m.AtendimentoMeioPageModule)
   },  
   {
     path: 'departamento',
-    loadChildren: () => import('./departamento/departamento-routing.module').then( m => m.DepartamentoPageRoutingModule)
+    loadChildren: () => import('./departamento/departamento.module').then( m => m.DepartamentoPageModule)
   },  
   {
     path: 'cidade',
-    loadChildren: () => import('./cidade/cidade-routing.module').then( m => m.CidadePageRoutingModule)
+    loadChildren: () => import('./cidade/cidade.module').then( m => m.CidadesPageModule)
   }
 ];
 

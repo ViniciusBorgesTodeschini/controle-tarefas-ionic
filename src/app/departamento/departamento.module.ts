@@ -14,7 +14,7 @@ import { DepartamentoCadastroComponent } from "./components/departamento-cadastr
       CommonModule,
       IonicModule,
       DepartamentoPageRoutingModule,
-      HttpClientModule,
+      HttpClientModule
     ],
     declarations: [DepartamentoPage, DepartamentoCadastroComponent],
     exports:[DepartamentoPage]

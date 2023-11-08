@@ -6,7 +6,7 @@ import { CidadeService } from '../../services/cidade.service';
 @Component({
   selector: 'app-cidade',
   templateUrl: './cidade-lista.page.html',
-  styleUrls: ['./cidade-lista.page.scss'],
+  styleUrls: ['./cidade-lista.page.scss']
 })
 export class CidadesPage implements OnInit {
   cidades: CidadeInterface[] = [];

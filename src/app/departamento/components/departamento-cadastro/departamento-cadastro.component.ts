@@ -8,7 +8,7 @@ import { DepartamentoService } from '../../services/departamento.service';
 @Component({
   selector: 'app-departamento-cadastro',
   templateUrl: './departamento-cadastro.component.html',
-  styleUrls: ['./departamento-cadastro.component.scss'],
+  styleUrls: ['./departamento-cadastro.component.scss']
 })
 export class DepartamentoCadastroComponent implements OnInit {
   departamentoId: number | null;

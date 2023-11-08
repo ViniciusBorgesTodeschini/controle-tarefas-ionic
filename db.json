@@ -1,0 +1,19 @@
+{
+  "atendimento-assunto": [
+    { "id": 1, "nome": "Folha de pagamento" },
+
+    { "id": 2, "nome": "Nota fiscal" },
+
+    { "id": 3, "nome": "MEI" }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

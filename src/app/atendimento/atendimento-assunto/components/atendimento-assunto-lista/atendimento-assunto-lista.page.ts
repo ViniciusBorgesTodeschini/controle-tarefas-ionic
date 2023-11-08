@@ -6,7 +6,7 @@ import { AtendimentoAssuntoService } from '../../services/atendimento-assunto.se
 @Component({
   selector: 'app-atendimento-assunto',
   templateUrl: './atendimento-assunto-lista.page.html',
-  styleUrls: ['./atendimento-assunto-lista.page.scss'],
+  styleUrls: ['./atendimento-assunto-lista.page.scss']
 })
 export class AtendimentoAssuntoPage implements OnInit {
   assuntos: AtendimentoAssuntoInterface[] = [];

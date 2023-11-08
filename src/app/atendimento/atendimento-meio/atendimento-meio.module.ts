@@ -14,7 +14,7 @@ import { AtendimentoMeioCadastroComponent } from "./components/atendimento-meio-
       CommonModule,
       IonicModule,
       AtendimentoMeioPageRoutingModule,
-      HttpClientModule,
+      HttpClientModule
     ],
     declarations: [AtendimentoMeioPage, AtendimentoMeioCadastroComponent],
     exports:[AtendimentoMeioPage]

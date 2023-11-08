@@ -6,7 +6,7 @@ import { AtendimentoMeioService } from '../../services/atendimento-meio.service'
 @Component({
   selector: 'app-atendimento-meio',
   templateUrl: './atendimento-meio-lista.page.html',
-  styleUrls: ['./atendimento-meio-lista.page.scss'],
+  styleUrls: ['./atendimento-meio-lista.page.scss']
 })
 export class AtendimentoMeioPage implements OnInit {
   meios: AtendimentoMeioInterface[] = [];
