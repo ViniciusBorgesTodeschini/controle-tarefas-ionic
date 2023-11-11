@@ -29,7 +29,19 @@ const routes: Routes = [
   },  
   {
     path: 'cidade',
-    loadChildren: () => import('./cidade/cidade.module').then( m => m.CidadesPageModule)
+    loadChildren: () => import('./cidade/cidade.module').then( m => m.CidadePageModule)
+  },
+  {
+    path: 'pessoa',
+    loadChildren: () => import('./pessoa/pessoa.module').then( m => m.PessoaPageModule)
+  },
+  {
+    path: 'usuario',
+    loadChildren: () => import('./usuario/usuario.module').then( m => m.UsuarioPageModule)
+  },
+  {
+    path: 'atendimento',
+    loadChildren: () => import('./atendimento/atendimento.module').then( m => m.AtendimentoPageModule)
   }
 ];
 

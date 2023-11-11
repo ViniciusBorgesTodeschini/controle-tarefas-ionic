@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Cadastro de atendimentos</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="atendimentoForm">
+    <ion-item>
+      <ion-label position="floating">Descrição: </ion-label>
+      <ion-input formControlName="detalhes" type="text"> </ion-input>
+      <ion-text
+        color="danger"
+        *ngIf="detalhes?.invalid && (detalhes?.dirty || detalhes?.touched)"
+      >
+        <small *ngIf="detalhes?.errors?.['required']">
+          O campo descrição é obrigatório
+        </small>
+        <small *ngIf="detalhes?.errors?.['minlength']">
+          O campo descrição deve conter no mínimo
+          {{ detalhes?.errors?.['minlength'].requiredLength }} caracteres
+        </small>
+        <small *ngIf="detalhes?.errors?.['maxlength']">
+          O campo descrição deve conter no máximo
+          {{ detalhes?.errors?.['maxlength'].requiredLength }} caracteres
+        </small>
+      </ion-text>
+    </ion-item>
+
+    <ion-fab vertical="bottom" horizontal="end">
+      <ion-fab-button (click)="salvar()" [disabled]="!atendimentoForm.valid">
+        <ion-icon name="checkmark-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </form>
+</ion-content>

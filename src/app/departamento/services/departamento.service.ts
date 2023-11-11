@@ -14,7 +14,7 @@ export class DepartamentoService {
     private httpClient: HttpClient
   ) {}
 
-  getAtendimentosMeios(): Observable<DepartamentoInterface[]> {
+  getDepartamentos(): Observable<DepartamentoInterface[]> {
     return this.httpClient.get<DepartamentoInterface[]>(this.url);
   }
 

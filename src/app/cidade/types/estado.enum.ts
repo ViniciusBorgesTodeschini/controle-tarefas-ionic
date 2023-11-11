@@ -1,5 +1,4 @@
 export enum EstadoEnum {
-
     AC = 'Acre',
     AL = 'Alagoas',
     AP = 'Amapá',

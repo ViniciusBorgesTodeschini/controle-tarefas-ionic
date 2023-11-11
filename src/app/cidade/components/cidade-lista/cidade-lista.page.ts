@@ -8,7 +8,7 @@ import { CidadeService } from '../../services/cidade.service';
   templateUrl: './cidade-lista.page.html',
   styleUrls: ['./cidade-lista.page.scss']
 })
-export class CidadesPage implements OnInit {
+export class CidadePage implements OnInit {
   cidades: CidadeInterface[] = [];
 
   constructor(
