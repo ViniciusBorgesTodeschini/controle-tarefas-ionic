@@ -7,8 +7,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { CidadePageRoutingModule } from './cidade-routing.module';
 
-import { CidadesPage } from './components/cidade-lista/cidade-lista.page';
-import { CidadesCadastroComponent } from './components/cidade-cadastro/cidade-cadastro.component';
+import { CidadePage } from './components/cidade-lista/cidade-lista.page';
+import { CidadeCadastroComponent } from './components/cidade-cadastro/cidade-cadastro.component';
 
 @NgModule({
   imports: [
@@ -19,6 +19,6 @@ import { CidadesCadastroComponent } from './components/cidade-cadastro/cidade-ca
     CidadePageRoutingModule,
     HttpClientModule
   ],
-  declarations: [CidadesPage, CidadesCadastroComponent]
+  declarations: [CidadePage, CidadeCadastroComponent]
 })
-export class CidadesPageModule {}
+export class CidadePageModule {}

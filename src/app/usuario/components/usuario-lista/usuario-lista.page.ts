@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
-import { DepartamentoInterface } from '../../types/departamento.interface';
-import { DepartamentoService } from '../../services/departamento.service';
+import { UsuarioInterface } from '../../types/usuario.interface';
+import { UsuarioService } from '../../services/usuario.service';
 
 @Component({
-  selector: 'app-departamento',
-  templateUrl: './departamento-lista.page.html',
-  styleUrls: ['./departamento-lista.page.scss']
+  selector: 'app-usuario',
+  templateUrl: './usuario-lista.page.html',
+  styleUrls: ['./usuario-lista.page.scss']
 })
-export class DepartamentoPage implements OnInit {
-  departamentos: DepartamentoInterface[] = [];
+export class UsuarioPage implements OnInit {
+  usuarios: UsuarioInterface[] = [];
 
   constructor(
     private alertController: AlertController,
     private toastController: ToastController,
-    private departamentoService: DepartamentoService
+    private usuarioService: UsuarioService
   ) {}
 
   ionViewWillEnter() {
@@ -37,9 +37,9 @@ export class DepartamentoPage implements OnInit {
   ngOnInit() {}
 
   listar() {
-    this.departamentoService.getDepartamentos().subscribe(
+    this.usuarioService.getUsuarios().subscribe(
       (dados) => {
-        this.departamentos = dados;
+        this.usuarios = dados;
       },
       (erro) => {
         console.error(erro);
@@ -47,15 +47,15 @@ export class DepartamentoPage implements OnInit {
     );
   }
 
-  confirmarExclusao(departamento: DepartamentoInterface) {
+  confirmarExclusao(usuario: UsuarioInterface) {
     this.alertController
       .create({
         header: 'Confirmação de exclusão',
-        message: `Deseja excluir o departamento ${departamento.nome}?`,
+        message: `Deseja excluir a usuario ${usuario.nome}?`,
         buttons: [
           {
             text: 'Sim',
-            handler: () => this.excluir(departamento),
+            handler: () => this.excluir(usuario),
           },
           {
             text: 'Não',
@@ -65,15 +65,15 @@ export class DepartamentoPage implements OnInit {
       .then((alerta) => alerta.present());
   }
 
-  private excluir(departamento: DepartamentoInterface) {
-    if (departamento.id) {
-      this.departamentoService.excluir(departamento.id).subscribe(
+  private excluir(usuario: UsuarioInterface) {
+    if (usuario.id) {
+      this.usuarioService.excluir(usuario.id).subscribe(
         () => this.listar(),
         (erro) => {
           console.error(erro);
           this.toastController
             .create({
-              message: `Não foi possível excluir o departamento ${departamento.nome}`,
+              message: `Não foi possível excluir a usuario ${usuario.nome}`,
               duration: 5000,
               keyboardClose: true,
               color: 'danger',

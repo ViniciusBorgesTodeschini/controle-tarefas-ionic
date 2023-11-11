@@ -28,15 +28,15 @@ export class DepartamentoCadastroComponent implements OnInit {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id) {
       this.departamentoId = parseInt(id);
-      this.departamentoService.getDepartamento(this.departamentoId).subscribe((antendimentoMeio) => {
-        this.departamentoForm = this.createForm(antendimentoMeio);
+      this.departamentoService.getDepartamento(this.departamentoId).subscribe((departamento) => {
+        this.departamentoForm = this.createForm(departamento);
       });
     }
   }
 
-  private createForm(meio?: DepartamentoInterface) {
+  private createForm(departamento?: DepartamentoInterface) {
     return new FormGroup({
-      nome: new FormControl(meio?.nome || '', [
+      nome: new FormControl(departamento?.nome || '', [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(150),
@@ -45,17 +45,17 @@ export class DepartamentoCadastroComponent implements OnInit {
   }
 
   salvar() {
-    const meio: DepartamentoInterface = {
+    const departamento: DepartamentoInterface = {
       ...this.departamentoForm.value,
       id: this.departamentoId,
     };
-    this.departamentoService.salvar(meio).subscribe(
+    this.departamentoService.salvar(departamento).subscribe(
       () => this.router.navigate(['departamentos']),
       (erro) => {
         console.error(erro);
         this.toastController
           .create({
-            message: `Não foi possível salvar o meio de atendimento ${meio.nome}`,
+            message: `Não foi possível salvar o departamento ${departamento.nome}`,
             duration: 5000,
             keyboardClose: true,
             color: 'danger',

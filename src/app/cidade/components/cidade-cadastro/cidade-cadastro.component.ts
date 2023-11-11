@@ -11,7 +11,7 @@ import { EstadoEnum } from '../../types/estado.enum';
   templateUrl: './cidade-cadastro.component.html',
   styleUrls: ['./cidade-cadastro.component.scss']
 })
-export class CidadesCadastroComponent implements OnInit {
+export class CidadeCadastroComponent implements OnInit {
   cidadeId: number | null;
   cidadesForm: FormGroup;
   estados: any;
@@ -62,7 +62,7 @@ export class CidadesCadastroComponent implements OnInit {
         console.error(erro);
         this.toastController
           .create({
-            message: `Não foi possível salvar o cidade ${cidade.nome}`,
+            message: `Não foi possível salvar a cidade ${cidade.nome}`,
             duration: 5000,
             keyboardClose: true,
             color: 'danger',

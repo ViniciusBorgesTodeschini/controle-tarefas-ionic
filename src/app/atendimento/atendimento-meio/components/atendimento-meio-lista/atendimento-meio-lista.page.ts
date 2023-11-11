@@ -51,7 +51,7 @@ export class AtendimentoMeioPage implements OnInit {
     this.alertController
       .create({
         header: 'Confirmação de exclusão',
-        message: `Deseja excluir o assunto ${meio.nome}?`,
+        message: `Deseja excluir o meio de atendimento ${meio.nome}?`,
         buttons: [
           {
             text: 'Sim',

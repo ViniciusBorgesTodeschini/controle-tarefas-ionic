@@ -1,21 +1,21 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CidadesCadastroComponent } from './components/cidade-cadastro/cidade-cadastro.component';
+import { CidadeCadastroComponent } from './components/cidade-cadastro/cidade-cadastro.component';
 
-import { CidadesPage } from './components/cidade-lista/cidade-lista.page';
+import { CidadePage } from './components/cidade-lista/cidade-lista.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: CidadesPage
+    component: CidadePage
   },
   {
     path: 'cadastro',
-    component: CidadesCadastroComponent
+    component: CidadeCadastroComponent
   },
   {
     path: 'edicao/:id',
-    component: CidadesCadastroComponent
+    component: CidadeCadastroComponent
   }
 ];
 
