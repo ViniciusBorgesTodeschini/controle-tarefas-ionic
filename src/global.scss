@@ -24,3 +24,29 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+
+.add-button {
+    margin-bottom: 1rem;
+}
+
+ion-fab-button.custom-color {
+    --color: #ffffff
+}
+
+.card {
+    max-width: 100%;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    margin-bottom: 1rem;
+}
+
+.buttons--container {
+    margin-bottom: 0.5rem;
+    float: right;
+}
+
+ion-button.custom-button {
+    --border-radius: 8px !important;
+    margin-right: 0.5rem;
+    --width: 60%;
+}

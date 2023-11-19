@@ -6,6 +6,8 @@ import { AtendimentoAssuntoPageRoutingModule } from "./atendimento-assunto-routi
 import { HttpClientModule } from "@angular/common/http";
 import { AtendimentoAssuntoPage } from "./components/atendimento-assunto-lista/atendimento-assunto-lista.page";
 import { AtendimentoAssuntoCadastroComponent } from "./components/atendimento-assunto-cadastro/atendimento-assunto-cadastro.component";
+import { FooterToolbarModule } from "src/app/common/components/footer-toolbar/footer-toolbar.module";
+import { SearchInputModule } from "src/app/common/components/seach-input/search-input.module";
 
 @NgModule({
     imports: [
@@ -15,6 +17,8 @@ import { AtendimentoAssuntoCadastroComponent } from "./components/atendimento-as
       IonicModule,
       AtendimentoAssuntoPageRoutingModule,
       HttpClientModule,
+      FooterToolbarModule,
+      SearchInputModule
     ],
     declarations: [AtendimentoAssuntoPage, AtendimentoAssuntoCadastroComponent],
     exports:[AtendimentoAssuntoPage]

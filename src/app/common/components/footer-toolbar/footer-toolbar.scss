@@ -1,0 +1,22 @@
+.toolbar-buttons--container {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    bottom: 0;
+}
+
+.menu-item--container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-title {
+    display: flex;
+    text-transform: capitalize;
+    font-size: 0.6rem;
+    margin-top: -0.2rem;
+    text-align: center;
+}

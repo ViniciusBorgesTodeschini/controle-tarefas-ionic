@@ -26,8 +26,13 @@
   text-decoration: none;
 }
 
-.search-input {
-  width: 40%;
-  height: 2rem;
+ion-input.search-input {
+  width: 60%;
+  max-height: 8% !important;
   margin-left: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 30px;
+  border: 1px solid #E3E6EF !important;
+  margin: 0 0 1rem 0.8rem;
+  text-indent: 7%;
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController, MenuController, ToastController } from '@ionic/angular';
 import { AtendimentoAssuntoInterface } from '../../types/atendimento-assunto.interface';
 import { AtendimentoAssuntoService } from '../../services/atendimento-assunto.service';
 
@@ -14,7 +14,8 @@ export class AtendimentoAssuntoPage implements OnInit {
   constructor(
     private alertController: AlertController,
     private toastController: ToastController,
-    private atendimentoAssuntoService: AtendimentoAssuntoService
+    private atendimentoAssuntoService: AtendimentoAssuntoService,
+    private menuCtrl: MenuController
   ) {}
 
   ionViewWillEnter() {

@@ -1,0 +1,17 @@
+<ion-footer [translucent]="true">
+  <ion-toolbar contentId="menu">
+    <ion-buttons
+      slot="secondary"
+      class="toolbar-buttons--container"
+      *ngFor="let menu of menuItems; let i = index"
+    >
+      <div class="menu-item--containter">
+        <ion-button (click)="menu?.onclick()" routerLink="[menu.url]">
+          <ion-icon slot="icon-only" name="{{menu.icon}}"></ion-icon>
+        </ion-button>
+        <p class="menu-title">{{ menu.title }}</p>
+      </div>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
+

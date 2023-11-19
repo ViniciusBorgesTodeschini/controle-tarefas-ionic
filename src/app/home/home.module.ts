@@ -5,7 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
-import { FooterToolbarModule } from '../components/footer-toolbar/footer-toolbar.module';
+import { FooterToolbarModule } from '../common/components/footer-toolbar/footer-toolbar.module';
+import {  SearchInputModule } from '../common/components/seach-input/search-input.module';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { FooterToolbarModule } from '../components/footer-toolbar/footer-toolbar
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    FooterToolbarModule
+    FooterToolbarModule,
+    SearchInputModule
   ],
   declarations: [HomePage]
 })

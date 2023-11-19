@@ -1,3 +1,21 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu type="overlay" menuId="side-menu" contentId="main-content">
+    <ion-header>
+      <ion-toolbar color="dark">
+        <ion-title>Task Do</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-menu-toggle
+        auto-hide="false"
+        *ngFor="let sideMenu of sideMenuItems; let i = index"
+      >
+        <ion-item lines="none" detail="false" (click)="sideMenu.onclick()">
+          <ion-icon slot="start" name="{{ sideMenu.icon }}"></ion-icon>
+          <ion-label>{{ sideMenu.title }}</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main-content"></ion-router-outlet>
 </ion-app>

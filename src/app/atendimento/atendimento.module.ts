@@ -6,6 +6,8 @@ import { AtendimentoPageRoutingModule } from "./atendimento-routing.module";
 import { HttpClientModule } from "@angular/common/http";
 import { AtendimentoPage } from "./components/atendimento-lista/atendimento-lista.page";
 import { AtendimentoCadastroComponent } from "./components/atendimento-cadastro/atendimento-cadastro.component";
+import { FooterToolbarModule } from "../common/components/footer-toolbar/footer-toolbar.module";
+import { SearchInputModule } from "../common/components/seach-input/search-input.module";
 
 @NgModule({
     imports: [
@@ -14,7 +16,9 @@ import { AtendimentoCadastroComponent } from "./components/atendimento-cadastro/
       CommonModule,
       IonicModule,
       AtendimentoPageRoutingModule,
-      HttpClientModule
+      HttpClientModule,
+      FooterToolbarModule,
+      SearchInputModule
     ],
     declarations: [AtendimentoPage, AtendimentoCadastroComponent],
     exports:[AtendimentoPage]
