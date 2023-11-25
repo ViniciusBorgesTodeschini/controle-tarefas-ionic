@@ -83,4 +83,8 @@ export class DepartamentoPage implements OnInit {
       );
     }
   }
+
+  setDepartamentos(event: any) {
+    this.departamentos = event;
+  }
 }

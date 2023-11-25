@@ -1,16 +1,12 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
+  <ion-toolbar color="danger tint">
     <ion-title>Cadastro de atendimentos</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
   <form [formGroup]="atendimentoForm">
-    <ion-item>
-      <ion-label position="floating">Descrição: </ion-label>
-      <ion-input formControlName="detalhes" type="text"> </ion-input>
+    <ion-item lines="none">
+      <ion-input formControlName="detalhes" placeholder="Digite a descricao..." type="text"> </ion-input>
       <ion-text
         color="danger"
         *ngIf="detalhes?.invalid && (detalhes?.dirty || detalhes?.touched)"

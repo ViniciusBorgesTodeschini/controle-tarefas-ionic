@@ -1,45 +1,68 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="danger tint">
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
+      <ion-button [routerLink]="['/cidade']">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons> 
     <ion-title>Cadastro de cidades</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
   <form [formGroup]="cidadesForm">
-    <ion-item>
-      <ion-label position="floating">Nome: </ion-label>
-      <ion-input formControlName="nome" type="text"> </ion-input>
-      <ion-text
-        color="danger"
-        *ngIf="nome?.invalid && (nome?.dirty || nome?.touched)"
-      >
-        <small *ngIf="nome?.errors?.['required']">
-          O campo nome é obrigatório
-        </small>
-        <small *ngIf="nome?.errors?.['minlength']">
-          O campo nome deve conter no mínimo
-          {{ nome?.errors?.['minlength'].requiredLength }} caracteres
-        </small>
-        <small *ngIf="nome?.errors?.['maxlength']">
-          O campo nome deve conter no máximo
-          {{ nome?.errors?.['maxlength'].requiredLength }} caracteres
-        </small>
-      </ion-text>
-    </ion-item>
-    <ion-list>
-      <ion-item>
-        <ion-select aria-label="estado" interface="popover" placeholder="Selecione o estado">
-          <ion-select-option *ngFor="let estado of estados" [value]="estado">{{ estado.value }}</ion-select-option>
-        </ion-select>
+    <div class="input-item--container">
+      <ion-label class="input-label">Nome:</ion-label>
+      <ion-item lines="none">
+        <ion-input
+          id="nome"
+          placeholder="Digite o nome..."
+          formControlName="nome"
+          type="text"
+        >
+        </ion-input>
+        <br />
+        <ion-text
+          color="danger"
+          *ngIf="nome?.invalid && (nome?.dirty || nome?.touched)"
+        >
+          <small *ngIf="nome?.errors?.['required']">
+            O campo nome é obrigatório
+          </small>
+          <small *ngIf="nome?.errors?.['minlength']">
+            O campo nome deve conter no mínimo
+            {{ nome?.errors?.['minlength'].requiredLength }} caracteres
+          </small>
+          <small *ngIf="nome?.errors?.['maxlength']">
+            O campo nome deve conter no máximo
+            {{ nome?.errors?.['maxlength'].requiredLength }} caracteres
+          </small>
+        </ion-text>
       </ion-item>
-    </ion-list>
+    </div>
 
-    <ion-fab vertical="bottom" horizontal="end">
-      <ion-fab-button (click)="salvar()" [disabled]="!cidadesForm.valid">
-        <ion-icon name="checkmark-outline"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
+    <div class="input-item--container">
+      <ion-label class="input-label">Estado:</ion-label>
+      <ion-item lines="none">
+        <ion-select
+          id="estado"
+          placeholder="informe o estado..."
+          formControlName="estado"
+          interface="popover"
+        >
+          <ion-select-option *ngFor="let estado of estados" [value]="estado">{{ estado }}</ion-select-option>
+        </ion-select>
+        <br />
+        <ion-text
+          color="danger"
+          *ngIf="nome?.invalid && (nome?.dirty || nome?.touched)"
+        >
+          <small *ngIf="nome?.errors?.['required']">
+            O campo estado é obrigatório
+          </small>
+        </ion-text>
+      </ion-item>
+    </div>
+
+    <ion-button color="success" class="salvar-form--button" (click)="salvar()" [disabled]="!cidadesForm.valid">Salvar</ion-button>
   </form>
 </ion-content>

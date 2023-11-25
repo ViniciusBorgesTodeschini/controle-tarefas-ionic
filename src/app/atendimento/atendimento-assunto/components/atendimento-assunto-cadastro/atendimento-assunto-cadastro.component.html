@@ -1,38 +1,45 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="danger tint">
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Cadastro de assuntos de atendimento</ion-title>
+      <ion-button [routerLink]="['/atendimento-assunto']">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons> 
+    <ion-title>Cadastro de assuntos</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
   <form [formGroup]="atendimentoAssuntoForm">
-    <ion-item>
-      <ion-label position="floating">Descrição: </ion-label>
-      <ion-input formControlName="nome" type="text"> </ion-input>
-      <ion-text
-        color="danger"
-        *ngIf="nome?.invalid && (nome?.dirty || nome?.touched)"
-      >
-        <small *ngIf="nome?.errors?.['required']">
-          O campo descrição é obrigatório
-        </small>
-        <small *ngIf="nome?.errors?.['minlength']">
-          O campo descrição deve conter no mínimo
-          {{ nome?.errors?.['minlength'].requiredLength }} caracteres
-        </small>
-        <small *ngIf="nome?.errors?.['maxlength']">
-          O campo descrição deve conter no máximo
-          {{ nome?.errors?.['maxlength'].requiredLength }} caracteres
-        </small>
-      </ion-text>
-    </ion-item>
+    <div class="input-item--container">
+      <ion-label class="input-label">Nome:</ion-label>
+      <ion-item lines="none">
+        <ion-input
+          id="nome"
+          placeholder="Digite o nome..."
+          formControlName="nome"
+          type="text"
+        >
+        </ion-input>
+        <br />
+        <ion-text
+          color="danger"
+          *ngIf="nome?.invalid && (nome?.dirty || nome?.touched)"
+        >
+          <small *ngIf="nome?.errors?.['required']">
+            O campo descrição é obrigatório
+          </small>
+          <small *ngIf="nome?.errors?.['minlength']">
+            O campo descrição deve conter no mínimo
+            {{ nome?.errors?.['minlength'].requiredLength }} caracteres
+          </small>
+          <small *ngIf="nome?.errors?.['maxlength']">
+            O campo descrição deve conter no máximo
+            {{ nome?.errors?.['maxlength'].requiredLength }} caracteres
+          </small>
+        </ion-text>
+      </ion-item>
+    </div>
 
-    <ion-fab vertical="bottom" horizontal="end">
-      <ion-fab-button (click)="salvar()" [disabled]="!atendimentoAssuntoForm.valid">
-        <ion-icon name="checkmark-outline"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
+    <ion-button color="success" class="salvar-form--button" (click)="salvar()" [disabled]="!atendimentoAssuntoForm.valid">Salvar</ion-button>
   </form>
 </ion-content>

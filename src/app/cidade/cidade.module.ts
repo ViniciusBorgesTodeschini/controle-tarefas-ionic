@@ -9,6 +9,8 @@ import { CidadePageRoutingModule } from './cidade-routing.module';
 
 import { CidadePage } from './components/cidade-lista/cidade-lista.page';
 import { CidadeCadastroComponent } from './components/cidade-cadastro/cidade-cadastro.component';
+import { SearchInputModule } from '../common/components/seach-input/search-input.module';
+import { FooterToolbarModule } from '../common/components/footer-toolbar/footer-toolbar.module';
 
 @NgModule({
   imports: [
@@ -17,7 +19,9 @@ import { CidadeCadastroComponent } from './components/cidade-cadastro/cidade-cad
     CommonModule,
     IonicModule,
     CidadePageRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    SearchInputModule,
+    FooterToolbarModule
   ],
   declarations: [CidadePage, CidadeCadastroComponent]
 })

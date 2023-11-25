@@ -29,6 +29,11 @@ export class AppComponent {
       icon: 'person-outline',
       onclick: () => this.sideMenuNavigate('/pessoa'),
     },
+    {
+      title: 'Cidades',
+      icon: 'business-outline',
+      onclick: () => this.sideMenuNavigate('/cidade'),
+    },
   ];
 
   constructor(private router: Router, private menuCtrl: MenuController) {}

@@ -84,4 +84,8 @@ export class AtendimentoAssuntoPage implements OnInit {
       );
     }
   }
+
+  setAssuntos(event: any) {
+    this.assuntos = event;
+  }
 }

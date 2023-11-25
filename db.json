@@ -1,10 +1,130 @@
 {
   "atendimento-assunto": [
-    { "id": 1, "nome": "Folha de pagamento" },
-
-    { "id": 2, "nome": "Nota fiscal" },
-
-    { "id": 3, "nome": "MEI" }
+    {
+      "id": 1,
+      "nome": "Folha de pagamento"
+    },
+    {
+      "id": 2,
+      "nome": "Nota fiscal"
+    }
+  ],
+  "cidades": [
+    {
+      "id": 1,
+      "nome": "Icara",
+      "estado": "SC"
+    },
+    {
+      "id": 2,
+      "nome": "Criciuma",
+      "estado": "SC"
+    },
+    {
+      "nome": "Bahia",
+      "estado": "Bahia",
+      "id": 3
+    }
+  ],
+  "departamento": [
+    {
+      "id": 1,
+      "nome": "Fiscal"
+    },
+    {
+      "id": 2,
+      "nome": "Pessoal"
+    }
+  ],
+  "atendimento-meio": [
+    {
+      "nome": "Telefones",
+      "id": 1
+    },
+    {
+      "id": 2,
+      "nome": "Pessoalmente"
+    },
+    {
+      "nome": "email",
+      "id": 3
+    }
+  ],
+  "pessoa": [
+    {
+      "id": 1,
+      "nome": "PJ do Escritório",
+      "email": "meu.escritorio@gmail.com",
+      "tipo_pessoa": "PJ",
+      "documento": "000010010000101",
+      "endereco": "rua x, 0010",
+      "telefone": "4834321111",
+      "cidade": {
+        "id": 1,
+        "nome": "ICARA",
+        "estado": "SC"
+      },
+      "ativo": true,
+      "cliente": false,
+      "departamento": null,
+      "pessoa": null
+    },
+    {
+      "id": 2,
+      "nome": "José - Atendente do escritório",
+      "email": "fiscal.escritorio@gmail.com",
+      "tipo_pessoa": "PF",
+      "documento": "00100100101",
+      "endereco": "rua a, 001",
+      "telefone": "4834321111",
+      "cidade": {
+        "id": 1,
+        "nome": "ICARA",
+        "estado": "SC"
+      },
+      "ativo": true,
+      "cliente": false,
+      "departamento": {
+        "id": 1,
+        "nome": "FISCAL"
+      },
+      "empregador": {
+        "id": 12,
+        "nome": "PJ DO ESCRITORIO",
+        "email": "meu.escritorio@gmail.com",
+        "tipoPessoa": null,
+        "documento": "000010010000101",
+        "endereco": "rua x, 0010",
+        "telefone": "4834321111",
+        "cidade": {
+          "id": 1,
+          "nome": "ICARA",
+          "estado": "SC"
+        },
+        "ativo": true,
+        "cliente": false,
+        "departamento": null,
+        "empregador": null
+      }
+    },
+    {
+      "id": 3,
+      "nome": "PJ do Cliente A",
+      "email": "cliente.a@gmail.com",
+      "tipo_pessoa": "PJ",
+      "documento": "000020020000202",
+      "endereco": "rua xZ, 0020",
+      "telefone": "48343222222",
+      "cidade": {
+        "id": 2,
+        "nome": "CRICIUMA",
+        "estado": "SC"
+      },
+      "ativo": true,
+      "cliente": true,
+      "departamento": null,
+      "pessoa": null
+    }
   ],
   "comments": [
     {

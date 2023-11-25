@@ -50,7 +50,7 @@ export class AtendimentoMeioCadastroComponent implements OnInit {
       id: this.atendimentoMeioId,
     };
     this.atendimentoMeioService.salvar(meio).subscribe(
-      () => this.router.navigate(['atendimento-meios']),
+      () => this.router.navigate(['atendimento-meio']),
       (erro) => {
         console.error(erro);
         this.toastController

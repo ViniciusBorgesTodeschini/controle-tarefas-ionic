@@ -1,38 +1,162 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="danger tint">
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-button [routerLink]="['/pessoa']">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
     <ion-title>Cadastro de pessoas</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
   <form [formGroup]="pessoaForm">
-    <ion-item>
-      <ion-label position="floating">Descrição: </ion-label>
-      <ion-input formControlName="nome" type="text"> </ion-input>
-      <ion-text
-        color="danger"
-        *ngIf="nome?.invalid && (nome?.dirty || nome?.touched)"
-      >
-        <small *ngIf="nome?.errors?.['required']">
-          O campo descrição é obrigatório
-        </small>
-        <small *ngIf="nome?.errors?.['minlength']">
-          O campo descrição deve conter no mínimo
-          {{ nome?.errors?.['minlength'].requiredLength }} caracteres
-        </small>
-        <small *ngIf="nome?.errors?.['maxlength']">
-          O campo descrição deve conter no máximo
-          {{ nome?.errors?.['maxlength'].requiredLength }} caracteres
-        </small>
-      </ion-text>
-    </ion-item>
+    <div class="input-item--container">
+      <ion-label class="input-label">Nome:</ion-label>
+      <ion-item lines="none">
+        <ion-input
+          id="nome"
+          placeholder="Digite o nome..."
+          formControlName="nome"
+          type="text"
+        >
+        </ion-input>
+        <br />
+        <ion-text
+          color="danger"
+          *ngIf="nome?.invalid && (nome?.dirty || nome?.touched)"
+        >
+          <small *ngIf="nome?.errors?.['required']">
+            O campo nome é obrigatório
+          </small>
+          <small *ngIf="nome?.errors?.['minlength']">
+            O campo nome deve conter no mínimo
+            {{ nome?.errors?.['minlength'].requiredLength }} caracteres
+          </small>
+          <small *ngIf="nome?.errors?.['maxlength']">
+            O campo nome deve conter no máximo
+            {{ nome?.errors?.['maxlength'].requiredLength }} caracteres
+          </small>
+        </ion-text>
+      </ion-item>
+    </div>
 
-    <ion-fab vertical="bottom" horizontal="end">
-      <ion-fab-button (click)="salvar()" [disabled]="!pessoaForm.valid">
-        <ion-icon name="checkmark-outline"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
+    <div class="input-item--container">
+      <ion-label class="input-label">Tipo de pessoa:</ion-label>
+      <ion-item lines="none">
+        <ion-select
+          id="tipo-pessoa"
+          placeholder="informe o tipo..."
+          formControlName="tipo"
+          interface="popover"
+        >
+          <ion-select-option
+            *ngFor="let tipoPessoa of tiposPessoa"
+            [value]="tipoPessoa"
+            >{{ tipoPessoa }}</ion-select-option
+          >
+        </ion-select>
+      </ion-item>
+    </div>
+
+    <div class="input-item--container">
+      <ion-label class="input-label">Documento:</ion-label>
+      <ion-item lines="none">
+        <ion-input
+          id="documento"
+          placeholder="Digite o documento..."
+          formControlName="documento"
+          type="text"
+        >
+        </ion-input>
+        <br />
+      </ion-item>
+    </div>
+
+    <div class="input-item--container">
+      <ion-label class="input-label">Endereço:</ion-label>
+      <ion-item lines="none">
+        <ion-input
+          id="endereco"
+          placeholder="Digite o endereço..."
+          formControlName="endereco"
+          type="text"
+        >
+        </ion-input>
+        <br />
+      </ion-item>
+    </div>
+
+    <div class="input-item--container">
+      <ion-label class="input-label">Telefone:</ion-label>
+      <ion-item lines="none">
+        <ion-input
+          id="telefone"
+          placeholder="Digite o telefone..."
+          formControlName="telefone"
+          type="text"
+        >
+        </ion-input>
+        <br />
+      </ion-item>
+    </div>
+
+    <div class="input-item--container">
+      <ion-label class="input-label">Cidade:</ion-label>
+      <ion-item lines="none">
+        <ion-select
+          id="cidade"
+          placeholder="informe a cidade..."
+          interface="popover"
+          formControlName="cidade"
+        >
+          <ion-select-option *ngFor="let cidade of cidades" [value]="cidade">{{
+            cidade.nome
+          }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
+
+    <div class="input-item--container">
+      <ion-item lines="none">
+        <ion-checkbox color="success"  formControlName="ativo">A pessoa está ativa?</ion-checkbox>     
+      </ion-item>
+      <ion-item lines="none">
+        <ion-checkbox color="success" formControlName="cliente">A pessoa é um cliente?</ion-checkbox> 
+      </ion-item>
+    </div>
+
+    <div class="input-item--container">
+      <ion-label class="input-label">Departamento:</ion-label>
+      <ion-item lines="none">
+        <ion-select
+          id="departamento"
+          placeholder="informe o departamento..."
+          interface="popover"
+          formControlName="departamento"
+        >
+          <ion-select-option *ngFor="let departamento of departamentos" [value]="departamento">{{
+            departamento.nome
+          }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
+
+    <div class="input-item--container">
+      <ion-label class="input-label">Pessoa:</ion-label>
+      <ion-item lines="none">
+        <ion-select
+          id="pessoa"
+          placeholder="informe a pessoa..."
+          interface="popover"
+          formControlName="pessoa"
+        >
+          <ion-select-option *ngFor="let pessoa of pessoas" [value]="pessoa">{{
+            pessoa.nome
+          }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
+
+    <ion-button color="success" class="salvar-form--button" (click)="salvar()" [disabled]="!pessoaForm.valid">Salvar</ion-button>
   </form>
 </ion-content>

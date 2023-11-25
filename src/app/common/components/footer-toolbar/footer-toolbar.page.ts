@@ -25,7 +25,7 @@ export class FooterToolbar {
       icon: 'person-outline',
       onclick: () => this.navigate('/usuario'),
     },
-    { title: '', icon: 'menu-outline', onclick: () => this.openSideMenu() },
+    { title: 'configurações', icon: 'cog-outline', onclick: () => this.openSideMenu() },
   ];
 
   constructor(private router: Router, private menuCtrl: MenuController) {}

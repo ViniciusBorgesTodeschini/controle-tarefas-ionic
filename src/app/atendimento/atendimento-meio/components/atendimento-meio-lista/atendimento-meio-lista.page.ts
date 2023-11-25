@@ -83,4 +83,8 @@ export class AtendimentoMeioPage implements OnInit {
       );
     }
   }
+
+  setMeios(event: any) {
+    this.meios = event;
+  }
 }

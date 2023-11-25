@@ -11,12 +11,18 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    text-align: center;
 }
 
 .menu-title {
     display: flex;
     text-transform: capitalize;
-    font-size: 0.6rem;
+    font-size: 0.7rem;
     margin-top: -0.2rem;
     text-align: center;
+    margin-left: 0.2rem;
+}
+
+.footer-button {
+    margin-left: 0.6rem !important;
 }

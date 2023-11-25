@@ -1,32 +1,46 @@
 <ion-header color="dark">
-  <ion-toolbar color="dark">
+  <ion-toolbar color="danger tint">
+    <ion-icon slot="start" name="document-text-outline" class="header-icon"></ion-icon>
     <ion-title>Atendimento Assunto</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <search-input></search-input>
+  <search-input url="atendimento-assunto" propriedade="nome" (afterLoad)="setAssuntos($event)"></search-input>
   <ion-item-divider></ion-item-divider>
-  <ion-list>
-      <ion-card class="card" *ngFor="let assunto of assuntos">
-        <ion-card-header>
-          <ion-card-title>{{assunto.nome}}</ion-card-title>
-        </ion-card-header>
-        <ion-buttons class="buttons--container">
-          <ion-button class="custom-button" color="primary" fill="solid" [routerLink]="['edicao', assunto.id]">
-            <ion-icon name="create" slot="start"></ion-icon>
-            Editar
-          </ion-button>
-          <ion-button class="custom-button" color="danger" fill="solid" (click)="confirmarExclusao(assunto)">
-            <ion-icon name="trash" slot="start"></ion-icon>
-            Deletar
-          </ion-button>
-        </ion-buttons>
-      </ion-card>
+  <ion-list lines="none">
+    <div>
+      <ion-item *ngFor="let assunto of assuntos">
+        <ion-card class="card">
+          <ion-card-header>
+            <ion-card-title>{{assunto.nome}}</ion-card-title>
+          </ion-card-header>
+          <ion-buttons class="buttons--container">
+            <ion-button
+              class="custom-button"
+              color="primary"
+              fill="solid"
+              [routerLink]="['edicao', assunto.id]"
+            >
+              <ion-icon name="create" slot="start"></ion-icon>
+              Editar
+            </ion-button>
+            <ion-button
+              class="custom-button"
+              color="danger"
+              fill="solid"
+              (click)="confirmarExclusao(assunto)"
+            >
+              <ion-icon name="trash" slot="start"></ion-icon>
+              Deletar
+            </ion-button>
+          </ion-buttons>
+        </ion-card>
+      </ion-item>
+    </div>
   </ion-list>
-
   <ion-fab vertical="bottom" horizontal="end">
-    <ion-fab-button color="custom-color" [routerLink]="['cadastro']">
+    <ion-fab-button color="danger tint" [routerLink]="['cadastro']">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

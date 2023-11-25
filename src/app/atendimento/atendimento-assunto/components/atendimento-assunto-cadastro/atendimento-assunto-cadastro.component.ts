@@ -51,7 +51,7 @@ export class AtendimentoAssuntoCadastroComponent implements OnInit {
       id: this.atendimentoAssuntoId,
     };
     this.atendimentoAssuntoService.salvar(assunto).subscribe(
-      () => this.router.navigate(['atendimento-assuntos']),
+      () => this.router.navigate(['atendimento-assunto']),
       (erro) => {
         console.error(erro);
         this.toastController

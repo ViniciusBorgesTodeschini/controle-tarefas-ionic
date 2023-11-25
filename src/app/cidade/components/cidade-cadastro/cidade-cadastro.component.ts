@@ -57,7 +57,7 @@ export class CidadeCadastroComponent implements OnInit {
       id: this.cidadeId,
     };
     this.cidadeService.salvar(cidade).subscribe(
-      () => this.router.navigate(['cidades']),
+      () => this.router.navigate(['cidade']),
       (erro) => {
         console.error(erro);
         this.toastController

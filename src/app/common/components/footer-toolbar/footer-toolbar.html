@@ -6,8 +6,8 @@
       *ngFor="let menu of menuItems; let i = index"
     >
       <div class="menu-item--containter">
-        <ion-button (click)="menu?.onclick()" routerLink="[menu.url]">
-          <ion-icon slot="icon-only" name="{{menu.icon}}"></ion-icon>
+        <ion-button (click)="menu?.onclick()" routerLink="[menu.url]" class="footer-button">
+          <ion-icon slot="icon-only" name="{{menu.icon}}" class="footer-icon"></ion-icon>
         </ion-button>
         <p class="menu-title">{{ menu.title }}</p>
       </div>
