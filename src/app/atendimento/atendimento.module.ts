@@ -18,7 +18,7 @@ import { SearchInputModule } from "../common/components/seach-input/search-input
       AtendimentoPageRoutingModule,
       HttpClientModule,
       FooterToolbarModule,
-      SearchInputModule
+      SearchInputModule,
     ],
     declarations: [AtendimentoPage, AtendimentoCadastroComponent],
     exports:[AtendimentoPage]

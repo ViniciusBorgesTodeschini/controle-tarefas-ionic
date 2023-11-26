@@ -1,4 +1,6 @@
+import { CidadeInterface } from "src/app/cidade/types/cidade.interface";
 import { TipoPessoaEnum } from "./tipo-pessoa.enum";
+import { DepartamentoInterface } from "src/app/departamento/types/departamento.interface";
 
 export interface PessoaInterface {
   id?: number | null;
@@ -7,9 +9,9 @@ export interface PessoaInterface {
   documento: string;
   endereco: string;
   telefone: string;
-  cidade: [];
+  cidade: CidadeInterface;
   ativo: boolean;
   cliente: boolean;
-  departamento: [] | null;
-  pessoa: [] | null;
+  departamento: DepartamentoInterface | null;
+  pessoa: PessoaInterface | null;
 }

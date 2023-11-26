@@ -108,8 +108,9 @@
           placeholder="informe a cidade..."
           interface="popover"
           formControlName="cidade"
+          [value]="selectedCidade.id"
         >
-          <ion-select-option *ngFor="let cidade of cidades" [value]="cidade">{{
+          <ion-select-option *ngFor="let cidade of cidades" [value]="cidade.id">{{
             cidade.nome
           }}</ion-select-option>
         </ion-select>
@@ -133,8 +134,9 @@
           placeholder="informe o departamento..."
           interface="popover"
           formControlName="departamento"
+          [value]="selectedDepartamento?.id"
         >
-          <ion-select-option *ngFor="let departamento of departamentos" [value]="departamento">{{
+          <ion-select-option *ngFor="let departamento of departamentos" [value]="departamento.id">{{
             departamento.nome
           }}</ion-select-option>
         </ion-select>
@@ -149,8 +151,9 @@
           placeholder="informe a pessoa..."
           interface="popover"
           formControlName="pessoa"
+          [value]="selectedPessoa?.id"
         >
-          <ion-select-option *ngFor="let pessoa of pessoas" [value]="pessoa">{{
+          <ion-select-option *ngFor="let pessoa of pessoas" [value]="pessoa.id">{{
             pessoa.nome
           }}</ion-select-option>
         </ion-select>

@@ -22,6 +22,9 @@ export class PessoaCadastroComponent implements OnInit {
   cidades: Array<CidadeInterface> = [];
   departamentos: Array<DepartamentoInterface> = [];
   pessoas: Array<PessoaInterface> = [];
+  selectedPessoa: PessoaInterface | null = {} as PessoaInterface;
+  selectedDepartamento: DepartamentoInterface | null = {} as DepartamentoInterface;
+  selectedCidade: CidadeInterface = {} as CidadeInterface;
 
   constructor(
     private toastController: ToastController,
@@ -44,6 +47,9 @@ export class PessoaCadastroComponent implements OnInit {
     if (id) {
       this.pessoaId = parseInt(id);
       this.pessoaService.getPessoa(this.pessoaId).subscribe((pessoa) => {
+        this.selectedCidade = pessoa.cidade;
+        this.selectedDepartamento = pessoa?.departamento;
+        this.selectedPessoa = pessoa.pessoa;
         this.pessoaForm = this.createForm(pessoa);
       });
     }
@@ -107,22 +113,22 @@ export class PessoaCadastroComponent implements OnInit {
         Validators.maxLength(11),
       ]),
       ativo: new FormControl(
-        pessoa?.ativo || true,
+        pessoa?.ativo,
         Validators.required
       ),
       cliente: new FormControl(
-        pessoa?.cliente || true,
+        pessoa?.cliente ,
         Validators.required
       ),
       cidade: new FormControl(
-        pessoa?.cidade || true,
+        pessoa?.cidade,
         Validators.required
       ),
       departamento: new FormControl(
-        pessoa?.departamento || null
+        pessoa?.departamento 
       ),
       pessoa: new FormControl(
-        pessoa?.pessoa || null
+        pessoa?.pessoa 
       )
     });
   }

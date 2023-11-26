@@ -1,7 +1,9 @@
+import { PessoaInterface } from "src/app/pessoa/types/pessoa.interface";
+
 export interface UsuarioInterface {
   id?: number | null;
   nome: string;
-  pessoa: [];
+  pessoa: PessoaInterface;
   dataCadastro: Date;
   dataAtualizacao: Date;
   dataUltimoAcesso: Date;
