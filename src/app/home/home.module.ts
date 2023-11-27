@@ -7,6 +7,7 @@ import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
 import { FooterToolbarModule } from '../common/components/footer-toolbar/footer-toolbar.module';
 import {  SearchInputModule } from '../common/components/seach-input/search-input.module';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/compiler';
 
 
 @NgModule({
@@ -16,7 +17,7 @@ import {  SearchInputModule } from '../common/components/seach-input/search-inpu
     IonicModule,
     HomePageRoutingModule,
     FooterToolbarModule,
-    SearchInputModule
+    SearchInputModule,
   ],
   declarations: [HomePage]
 })
