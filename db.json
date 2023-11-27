@@ -11,14 +11,14 @@
   ],
   "cidades": [
     {
-      "id": 1,
       "nome": "Icara",
-      "estado": "SC"
+      "estado": "Acre",
+      "id": 1
     },
     {
-      "id": 2,
       "nome": "Criciuma",
-      "estado": "SC"
+      "estado": "Acre",
+      "id": 2
     },
     {
       "nome": "Bahia",
@@ -130,6 +130,7 @@
   "usuario": [
     {
       "nome": "user_fiscal",
+      "email": "email@gmail.com",
       "pessoa": 2,
       "dataCadastro": "2023-11-26T18:19:43.062Z",
       "dataAtualizacao": "2023-11-26T18:19:43.062Z",
@@ -140,6 +141,7 @@
     },
     {
       "nome": "user_pessoal",
+      "email": "email@gmail.com",
       "pessoa": 3,
       "dataCadastro": "2023-11-26T18:19:29.755Z",
       "dataAtualizacao": "2023-11-26T18:19:29.755Z",
@@ -151,102 +153,20 @@
   ],
   "atendimento": [
     {
-      "id": 1,
       "detalhes": "maria perguntou sobre como emitir nota fiscal",
-      "inicio": "2023-05-16",
-      "fim": "2023-05-16",
       "assunto": {
-        "id": 2,
-        "nome": "NOTA FISCAL"
+        "id": 1,
+        "nome": "Folha de pagamento"
       },
       "meio": {
         "id": 3,
         "nome": "E-MAIL"
       },
-      "pessoa": {
-        "id": 16,
-        "nome": "Maria - Financeiro do cliente A",
-        "email": "fiscal.escritorio@gmail.com",
-        "tipo_pessoa": "PF",
-        "documento": "00300300303",
-        "endereco": "rua xZ, 0020",
-        "telefone": "48343222222",
-        "cidade": {
-          "id": 2,
-          "nome": "CRICIUMA",
-          "estado": "SC"
-        },
-        "ativo": true,
-        "cliente": false,
-        "departamento": {
-          "id": 4,
-          "nome": "FINANCEIRO"
-        },
-        "empregador": {
-          "id": 15,
-          "nome": "PJ DO CLIENTE A",
-          "email": "cliente.a@gmail.com",
-          "tipoPessoa": null,
-          "documento": "000020020000202",
-          "endereco": "rua xZ, 0020",
-          "telefone": "48343222222",
-          "cidade": {
-            "id": 2,
-            "nome": "CRICIUMA",
-            "estado": "SC"
-          },
-          "ativo": true,
-          "cliente": true,
-          "departamento": null,
-          "empregador": null
-        }
-      },
-      "usuario": {
-        "id": 2,
-        "nome": "USER_FISCAL",
-        "email": "fiscal.escritorio@gmail.com",
-        "pessoa": {
-          "id": 14,
-          "nome": "JOSÉ - ATENDENTE DO ESCRITÓRIO",
-          "email": "fiscal.escritorio@gmail.com",
-          "tipoPessoa": null,
-          "documento": "00100100101",
-          "endereco": "rua a, 001",
-          "telefone": "4834321111",
-          "cidade": {
-            "id": 1,
-            "nome": "ICARA",
-            "estado": "SC"
-          },
-          "ativo": true,
-          "cliente": false,
-          "departamento": {
-            "id": 1,
-            "nome": "FISCAL"
-          },
-          "empregador": {
-            "id": 12,
-            "nome": "PJ DO ESCRITORIO",
-            "email": "meu.escritorio@gmail.com",
-            "tipoPessoa": null,
-            "documento": "000010010000101",
-            "endereco": "rua x, 0010",
-            "telefone": "4834321111",
-            "cidade": {
-              "id": 1,
-              "nome": "ICARA",
-              "estado": "SC"
-            },
-            "ativo": true,
-            "cliente": false,
-            "departamento": null,
-            "empregador": null
-          }
-        },
-        "dataCadastro": null,
-        "dataAtualizacao": null,
-        "ativo": true
-      }
+      "inicioAtendimento": null,
+      "fimAtendimento": null,
+      "solicitante": 1,
+      "atendente": 2,
+      "id": 1
     },
     {
       "detalhes": "joao",
