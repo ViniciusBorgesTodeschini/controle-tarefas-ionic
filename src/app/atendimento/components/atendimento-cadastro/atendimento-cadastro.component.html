@@ -4,7 +4,7 @@
       <ion-button [routerLink]="['/atendimento']">
         <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
       </ion-button>
-    </ion-buttons> 
+    </ion-buttons>
     <ion-title>Cadastro de atendimentos</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -50,10 +50,38 @@
           [value]="selectedAssunto.id"
           (ionChange)="selectChange($event)"
         >
-          <ion-select-option *ngFor="let assunto of assuntos" [value]="assunto.id">{{
-            assunto.nome
-          }}</ion-select-option>
+          <ion-select-option
+            *ngFor="let assunto of assuntos"
+            [value]="assunto.id"
+            >{{ assunto.nome }}</ion-select-option
+          >
         </ion-select>
+      </ion-item>
+    </div>
+
+    <div class="input-item--container">
+      <ion-label class="input-label">Inicio do atendimento:</ion-label>
+      <ion-item lines="none">
+        <ion-datetime-button datetime="inicioAtendimento"></ion-datetime-button>
+
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime formControlName="inicioAtendimento" id="inicioAtendimento"></ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </ion-item>
+    </div>
+
+    <div class="input-item--container">
+      <ion-label class="input-label">Fim do atendimento:</ion-label>
+      <ion-item lines="none">
+        <ion-datetime-button datetime="fimAtendimento"></ion-datetime-button>
+
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime formControlName="fimAtendimento" id="fimAtendimento"></ion-datetime>
+          </ng-template>
+        </ion-modal>
       </ion-item>
     </div>
 
@@ -84,9 +112,11 @@
           formControlName="solicitante"
           [value]="selectedSolicitante?.id"
         >
-          <ion-select-option *ngFor="let solicitante of solicitantes" [value]="solicitante.id">{{
-            solicitante.nome
-          }}</ion-select-option>
+          <ion-select-option
+            *ngFor="let solicitante of solicitantes"
+            [value]="solicitante.id"
+            >{{ solicitante.nome }}</ion-select-option
+          >
         </ion-select>
       </ion-item>
     </div>
@@ -101,13 +131,21 @@
           formControlName="atendente"
           [value]="selectedAtendente?.id"
         >
-          <ion-select-option *ngFor="let atendente of atendentes" [value]="atendente.id">{{
-            atendente.nome
-          }}</ion-select-option>
+          <ion-select-option
+            *ngFor="let atendente of atendentes"
+            [value]="atendente.id"
+            >{{ atendente.nome }}</ion-select-option
+          >
         </ion-select>
       </ion-item>
     </div>
 
-    <ion-button color="success" class="salvar-form--button" (click)="salvar()" [disabled]="!atendimentoForm.valid">Salvar</ion-button>
+    <ion-button
+      color="success"
+      class="salvar-form--button"
+      (click)="salvar()"
+      [disabled]="!atendimentoForm.valid"
+      >Salvar</ion-button
+    >
   </form>
 </ion-content>

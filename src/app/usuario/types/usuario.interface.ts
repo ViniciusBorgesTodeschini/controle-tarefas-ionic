@@ -4,6 +4,7 @@ export interface UsuarioInterface {
   id?: number | null;
   nome: string;
   pessoa: PessoaInterface;
+  email: string;
   dataCadastro: Date;
   dataAtualizacao: Date;
   dataUltimoAcesso: Date;

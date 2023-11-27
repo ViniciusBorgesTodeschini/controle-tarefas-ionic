@@ -247,6 +247,19 @@
         "dataAtualizacao": null,
         "ativo": true
       }
+    },
+    {
+      "detalhes": "joao",
+      "assunto": {
+        "id": 1,
+        "nome": "Folha de pagamento"
+      },
+      "meio": 1,
+      "inicioAtendimento": "2023-11-28T16:05:00",
+      "fimAtendimento": "2023-11-30T15:04:00",
+      "solicitante": 2,
+      "atendente": 2,
+      "id": 2
     }
   ]
 }

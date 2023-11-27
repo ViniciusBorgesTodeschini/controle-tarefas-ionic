@@ -123,6 +123,12 @@ export class AtendimentoCadastroComponent implements OnInit {
         atendimento?.meio || null,
         Validators.required
       ),
+      inicioAtendimento: new FormControl(
+        atendimento?.inicioAtendimento || null,
+      ),
+      fimAtendimento: new FormControl(
+        atendimento?.fimAtendimento || null,
+      ),
       solicitante: new FormControl(
         atendimento?.solicitante || null,
         Validators.required

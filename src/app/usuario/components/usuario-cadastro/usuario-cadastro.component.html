@@ -41,6 +41,36 @@
     </div>
 
     <div class="input-item--container">
+      <ion-label class="input-label">Email:</ion-label>
+      <ion-item lines="none">
+        <ion-input
+          id="email"
+          placeholder="Digite o nome..."
+          formControlName="email"
+          type="email"
+        >
+        </ion-input>
+        <br />
+        <ion-text
+          color="danger"
+          *ngIf="email?.invalid && (email?.dirty || email?.touched)"
+        >
+          <small *ngIf="email?.errors?.['required']">
+            O campo email é obrigatório
+          </small>
+          <small *ngIf="email?.errors?.['minlength']">
+            O campo email deve conter no mínimo
+            {{ email?.errors?.['minlength'].requiredLength }} caracteres
+          </small>
+          <small *ngIf="email?.errors?.['maxlength']">
+            O campo email deve conter no máximo
+            {{ email?.errors?.['maxlength'].requiredLength }} caracteres
+          </small>
+        </ion-text>
+      </ion-item>
+    </div>
+
+    <div class="input-item--container">
       <ion-label class="input-label">Pessoa:</ion-label>
       <ion-item lines="none">
         <ion-select

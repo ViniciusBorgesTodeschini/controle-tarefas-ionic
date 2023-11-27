@@ -60,6 +60,11 @@ export class UsuarioCadastroComponent implements OnInit {
         Validators.minLength(3),
         Validators.maxLength(150),
       ]),
+      email: new FormControl(usuario?.email || '', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(150),
+      ]),
       pessoa: new FormControl(
         usuario?.pessoa
       ),
@@ -102,5 +107,9 @@ export class UsuarioCadastroComponent implements OnInit {
 
   get nome() {
     return this.usuarioForm.get('nome');
+  }
+
+  get email() {
+    return this.usuarioForm.get('email');
   }
 }

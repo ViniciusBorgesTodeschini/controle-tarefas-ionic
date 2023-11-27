@@ -7,6 +7,8 @@ export interface AtendimentoInterface {
   id?: number | null;
   detalhes: string;
   assunto: AtendimentoAssuntoInterface;
+  inicioAtendimento: Date;
+  fimAtendimento: Date;
   meio: AtendimentoMeioInterface;
   solicitante: PessoaInterface;
   atendente: UsuarioInterface;
