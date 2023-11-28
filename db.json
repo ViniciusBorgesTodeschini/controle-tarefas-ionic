@@ -148,7 +148,10 @@
   "atendimento": [
     {
       "detalhes": "maria solicou ajuda para emitir notas fiscais",
-      "assunto": {},
+      "assunto": {
+        "id": 1,
+        "nome": "Folha de pagamento"
+      },
       "meio": 1,
       "inicioAtendimento": null,
       "fimAtendimento": "2023-11-28T20:27:00",
@@ -158,7 +161,10 @@
     },
     {
       "detalhes": "joao",
-      "assunto": {},
+      "assunto": {
+        "id": 2,
+        "nome": "Nota fiscal"
+      },
       "meio": 1,
       "inicioAtendimento": "2023-11-28T16:05:00",
       "fimAtendimento": "2023-11-30T15:04:00",
