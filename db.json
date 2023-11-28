@@ -7,6 +7,10 @@
     {
       "id": 2,
       "nome": "Nota fiscal"
+    },
+    {
+      "nome": "Relatório",
+      "id": 3
     }
   ],
   "cidades": [
@@ -21,12 +25,13 @@
       "id": 2
     },
     {
-      "nome": "Bahia",
-      "estado": "Bahia",
+      "nome": "Cocal do Sul",
+      "estado": "Santa Catarina",
       "id": 3
     }
   ],
   "departamento": [
+    {},
     {
       "id": 1,
       "nome": "Fiscal"
@@ -34,11 +39,15 @@
     {
       "id": 2,
       "nome": "Pessoal"
+    },
+    {
+      "nome": "Contabil",
+      "id": 3
     }
   ],
   "atendimento-meio": [
     {
-      "nome": "Telefones",
+      "nome": "Telefone",
       "id": 1
     },
     {
@@ -46,11 +55,16 @@
       "nome": "Pessoalmente"
     },
     {
-      "nome": "email",
+      "nome": "e-mail",
       "id": 3
+    },
+    {
+      "nome": "Visita em loco",
+      "id": 4
     }
   ],
   "pessoa": [
+    {},
     {
       "id": 1,
       "nome": "PJ do Escritório",
@@ -90,40 +104,20 @@
       "id": 2
     },
     {
-      "nome": "PJ do Cliente A",
-      "tipo": "Pessoa física",
-      "documento": "12817412990",
-      "endereco": "rua xZ, 0020",
+      "nome": "Loja de Informática seu Zé",
+      "tipo": "Pessoa jurídica",
+      "documento": "00000171000101",
+      "endereco": "Rua da praça, 125",
       "telefone": "48343222222",
       "ativo": true,
-      "cliente": false,
+      "cliente": true,
       "cidade": {
         "id": 1,
         "nome": "Icara",
         "estado": "SC"
       },
-      "departamento": {
-        "id": 1,
-        "nome": "Fiscal"
-      },
-      "pessoa": {
-        "id": 3,
-        "nome": "PJ do Cliente A",
-        "email": "cliente.a@gmail.com",
-        "tipo_pessoa": "PJ",
-        "documento": "000020020000202",
-        "endereco": "rua xZ, 0020",
-        "telefone": "48343222222",
-        "cidade": {
-          "id": 2,
-          "nome": "CRICIUMA",
-          "estado": "SC"
-        },
-        "ativo": true,
-        "cliente": true,
-        "departamento": null,
-        "pessoa": null
-      },
+      "departamento": "",
+      "pessoa": "",
       "id": 3
     }
   ],
@@ -141,8 +135,8 @@
     },
     {
       "nome": "user_pessoal",
-      "email": "email@gmail.com",
-      "pessoa": 3,
+      "email": "email1@gmail.com",
+      "pessoa": 2,
       "dataCadastro": "2023-11-26T18:19:29.755Z",
       "dataAtualizacao": "2023-11-26T18:19:29.755Z",
       "dataUltimoAcesso": "2023-11-26T18:19:29.756Z",
@@ -153,27 +147,18 @@
   ],
   "atendimento": [
     {
-      "detalhes": "maria perguntou sobre como emitir nota fiscal",
-      "assunto": {
-        "id": 1,
-        "nome": "Folha de pagamento"
-      },
-      "meio": {
-        "id": 3,
-        "nome": "E-MAIL"
-      },
+      "detalhes": "maria solicou ajuda para emitir notas fiscais",
+      "assunto": {},
+      "meio": 1,
       "inicioAtendimento": null,
-      "fimAtendimento": null,
-      "solicitante": 1,
+      "fimAtendimento": "2023-11-28T20:27:00",
+      "solicitante": 3,
       "atendente": 2,
       "id": 1
     },
     {
       "detalhes": "joao",
-      "assunto": {
-        "id": 1,
-        "nome": "Folha de pagamento"
-      },
+      "assunto": {},
       "meio": 1,
       "inicioAtendimento": "2023-11-28T16:05:00",
       "fimAtendimento": "2023-11-30T15:04:00",

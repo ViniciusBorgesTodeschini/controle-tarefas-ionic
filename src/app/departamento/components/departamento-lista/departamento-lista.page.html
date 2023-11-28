@@ -18,7 +18,7 @@
   <ion-list lines="none">
     <div>
       <ion-item *ngFor="let departamento of departamentos">
-        <ion-card class="card" >
+        <ion-card class="card" *ngIf="departamento.id">
           <ion-card-header>
             <ion-card-title>{{departamento.nome}}</ion-card-title>
           </ion-card-header>

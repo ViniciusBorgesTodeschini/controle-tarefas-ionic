@@ -27,15 +27,15 @@ export class AppComponent {
       onclick: () => this.sideMenuNavigate('/departamento'),
     },
     {
-      title: 'Pessoas',
-      icon: 'person-outline',
-      onclick: () => this.sideMenuNavigate('/pessoa'),
-    },
-    {
       title: 'Cidades',
       icon: 'business-outline',
       onclick: () => this.sideMenuNavigate('/cidade'),
-    },
+    },    
+    {
+      title: 'Pessoas',
+      icon: 'person-outline',
+      onclick: () => this.sideMenuNavigate('/pessoa'),
+    }
   ];
 
   constructor(private router: Router, private menuCtrl: MenuController) {}

@@ -11,33 +11,42 @@
 <ion-content>
   <form [formGroup]="atendimentoForm">
     <div class="input-item--container">
-      <ion-label class="input-label">Detalhes:</ion-label>
+      <ion-label class="input-label">Atendente:</ion-label>
       <ion-item lines="none">
-        <ion-textarea
-          id="detalhe"
-          placeholder="Informe os detalhes do atendimento..."
-          formControlName="detalhes"
+        <ion-select
+          id="atendente"
+          placeholder="informe o atendente do atendimento..."
+          interface="popover"
+          formControlName="atendente"
+          [value]="selectedAtendente?.id"
         >
-        </ion-textarea>
-        <br />
-        <ion-text
-          color="danger"
-          *ngIf="detalhes?.invalid && (detalhes?.dirty || detalhes?.touched)"
-        >
-          <small *ngIf="detalhes?.errors?.['required']">
-            O campo descrição é obrigatório
-          </small>
-          <small *ngIf="detalhes?.errors?.['minlength']">
-            O campo descrição deve conter no mínimo
-            {{ detalhes?.errors?.['minlength'].requiredLength }} caracteres
-          </small>
-          <small *ngIf="detalhes?.errors?.['maxlength']">
-            O campo descrição deve conter no máximo
-            {{ detalhes?.errors?.['maxlength'].requiredLength }} caracteres
-          </small>
-        </ion-text>
+          <ion-select-option
+            *ngFor="let atendente of atendentes"
+            [value]="atendente.id"
+            >{{ atendente.nome }}</ion-select-option
+          >
+        </ion-select>
       </ion-item>
     </div>
+
+    <div class="input-item--container">
+      <ion-label class="input-label">Solicitante:</ion-label>
+      <ion-item lines="none">
+        <ion-select
+          id="meio"
+          placeholder="informe o solicitante do atendimento..."
+          interface="popover"
+          formControlName="solicitante"
+          [value]="selectedSolicitante?.id"
+        >
+          <ion-select-option
+            *ngFor="let solicitante of solicitantes"
+            [value]="solicitante.id"
+            >{{ solicitante.nome }}</ion-select-option
+          >
+        </ion-select>
+      </ion-item>
+    </div>    
 
     <div class="input-item--container">
       <ion-label class="input-label">Assunto:</ion-label>
@@ -58,6 +67,23 @@
         </ion-select>
       </ion-item>
     </div>
+
+    <div class="input-item--container">
+      <ion-label class="input-label">Meio para o atendimento:</ion-label>
+      <ion-item lines="none">
+        <ion-select
+          id="meio"
+          placeholder="informe o meio do atendimento..."
+          interface="popover"
+          formControlName="meio"
+          [value]="selectedMeio.id"
+        >
+          <ion-select-option *ngFor="let meio of meios" [value]="meio.id">{{
+            meio.nome
+          }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>    
 
     <div class="input-item--container">
       <ion-label class="input-label">Inicio do atendimento:</ion-label>
@@ -86,57 +112,31 @@
     </div>
 
     <div class="input-item--container">
-      <ion-label class="input-label">Meio para o atendimento:</ion-label>
+      <ion-label class="input-label">Detalhes:</ion-label>
       <ion-item lines="none">
-        <ion-select
-          id="meio"
-          placeholder="informe o meio do atendimento..."
-          interface="popover"
-          formControlName="meio"
-          [value]="selectedMeio.id"
+        <ion-textarea
+          id="detalhe"
+          placeholder="Informe os detalhes do atendimento..."
+          formControlName="detalhes"
         >
-          <ion-select-option *ngFor="let meio of meios" [value]="meio.id">{{
-            meio.nome
-          }}</ion-select-option>
-        </ion-select>
-      </ion-item>
-    </div>
-
-    <div class="input-item--container">
-      <ion-label class="input-label">Solicitante:</ion-label>
-      <ion-item lines="none">
-        <ion-select
-          id="meio"
-          placeholder="informe o solicitante do atendimento..."
-          interface="popover"
-          formControlName="solicitante"
-          [value]="selectedSolicitante?.id"
+        </ion-textarea>
+        <br />
+        <ion-text
+          color="danger"
+          *ngIf="detalhes?.invalid && (detalhes?.dirty || detalhes?.touched)"
         >
-          <ion-select-option
-            *ngFor="let solicitante of solicitantes"
-            [value]="solicitante.id"
-            >{{ solicitante.nome }}</ion-select-option
-          >
-        </ion-select>
-      </ion-item>
-    </div>
-
-    <div class="input-item--container">
-      <ion-label class="input-label">Atendente:</ion-label>
-      <ion-item lines="none">
-        <ion-select
-          id="atendente"
-          placeholder="informe o atendente do atendimento..."
-          interface="popover"
-          formControlName="atendente"
-          [value]="selectedAtendente?.id"
-        >
-          <ion-select-option
-            *ngFor="let atendente of atendentes"
-            [value]="atendente.id"
-            >{{ atendente.nome }}</ion-select-option
-          >
-        </ion-select>
+          <small *ngIf="detalhes?.errors?.['required']">
+            O campo descrição é obrigatório
+          </small>
+          <small *ngIf="detalhes?.errors?.['minlength']">
+            O campo descrição deve conter no mínimo
+            {{ detalhes?.errors?.['minlength'].requiredLength }} caracteres
+          </small>
+          <small *ngIf="detalhes?.errors?.['maxlength']">
+            O campo descrição deve conter no máximo
+            {{ detalhes?.errors?.['maxlength'].requiredLength }} caracteres
+          </small>
+        </ion-text>
       </ion-item>
     </div>
 

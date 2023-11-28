@@ -10,7 +10,7 @@
   <ion-list lines="none">
     <div>
       <ion-item *ngFor="let pessoa of pessoas">
-        <ion-card class="card">
+        <ion-card class="card" *ngIf="pessoa.id">
           <ion-card-header>
             <ion-card-title>{{pessoa.nome}}</ion-card-title>
           </ion-card-header>
