@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
 import { AtendimentoInterface } from '../../types/atendimento.interface';
 import { AtendimentoService } from '../../services/atendimento.service';
+import { AtendimentoAssuntoService } from '../../atendimento-assunto/services/atendimento-assunto.service';
+import { AtendimentoAssuntoInterface } from '../../atendimento-assunto/types/atendimento-assunto.interface';
 
 @Component({
   selector: 'app-atendimento',
@@ -10,11 +12,13 @@ import { AtendimentoService } from '../../services/atendimento.service';
 })
 export class AtendimentoPage implements OnInit {
   atendimentos: AtendimentoInterface[] = [];
+  assunto: AtendimentoAssuntoInterface = {} as AtendimentoAssuntoInterface;
 
   constructor(
     private alertController: AlertController,
     private toastController: ToastController,
-    private atendimentoService: AtendimentoService
+    private atendimentoService: AtendimentoService,
+    private assuntoService: AtendimentoAssuntoService
   ) {}
 
   ionViewWillEnter() {
@@ -36,14 +40,14 @@ export class AtendimentoPage implements OnInit {
 
   ngOnInit() {}
 
-  listar() {
+   listar() {
     this.atendimentoService.getAtendimentos().subscribe(
-      (dados) => {
-        this.atendimentos = dados;
-      },
-      (erro) => {
-        console.error(erro);
-      }
+        (dados) => {
+          this.atendimentos = dados;
+        },
+        (erro) => {
+          console.error(erro);
+        }
     );
   }
 
@@ -51,7 +55,7 @@ export class AtendimentoPage implements OnInit {
     this.alertController
       .create({
         header: 'Confirmação de exclusão',
-        message: `Deseja excluir a atendimento ${atendimento.assunto}?`,
+        message: `Deseja excluir a atendimento ${atendimento.assunto.nome}?`,
         buttons: [
           {
             text: 'Sim',
@@ -82,5 +86,9 @@ export class AtendimentoPage implements OnInit {
         }
       );
     }
+  }
+
+  setAtendimentos(event: any) {
+    this.atendimentos = event;
   }
 }

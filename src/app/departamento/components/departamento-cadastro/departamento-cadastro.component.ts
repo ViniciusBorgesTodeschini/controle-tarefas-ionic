@@ -50,7 +50,7 @@ export class DepartamentoCadastroComponent implements OnInit {
       id: this.departamentoId,
     };
     this.departamentoService.salvar(departamento).subscribe(
-      () => this.router.navigate(['departamentos']),
+      () => this.router.navigate(['departamento']),
       (erro) => {
         console.error(erro);
         this.toastController

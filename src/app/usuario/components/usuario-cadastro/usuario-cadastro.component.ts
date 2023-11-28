@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { UsuarioInterface } from '../../types/usuario.interface';
 import { UsuarioService } from '../../services/usuario.service';
+import { PessoaInterface } from 'src/app/pessoa/types/pessoa.interface';
+import { PessoaService } from 'src/app/pessoa/services/pessoa.service';
 
 @Component({
   selector: 'app-usuario-cadastro',
@@ -13,15 +15,19 @@ import { UsuarioService } from '../../services/usuario.service';
 export class UsuarioCadastroComponent implements OnInit {
   usuarioId: number | null;
   usuarioForm: FormGroup;
+  pessoas: Array<PessoaInterface> = [];
+  selectedPessoa: PessoaInterface = {} as PessoaInterface;
 
   constructor(
     private toastController: ToastController,
     private activatedRoute: ActivatedRoute,
     private usuarioService: UsuarioService,
-    private router: Router
+    private router: Router,
+    private pessoaService: PessoaService
   ) {
     this.usuarioId = null;
     this.usuarioForm = this.createForm();
+    this.getPessoas();
   }
 
   ngOnInit() {
@@ -29,9 +35,22 @@ export class UsuarioCadastroComponent implements OnInit {
     if (id) {
       this.usuarioId = parseInt(id);
       this.usuarioService.getUsuario(this.usuarioId).subscribe((usuario) => {
+        this.selectedPessoa = usuario.pessoa;
         this.usuarioForm = this.createForm(usuario);
+        console.log(this.usuarioForm)
       });
     }
+  }
+
+  private getPessoas(): void {
+    this.pessoaService.getPessoas().subscribe(
+      (dados) => {
+        this.pessoas = Object.values(dados);
+      },
+      (erro) => {
+        console.error(erro);
+      }
+    );
   }
 
   private createForm(usuario?: UsuarioInterface) {
@@ -41,8 +60,13 @@ export class UsuarioCadastroComponent implements OnInit {
         Validators.minLength(3),
         Validators.maxLength(150),
       ]),
+      email: new FormControl(usuario?.email || '', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(150),
+      ]),
       pessoa: new FormControl(
-        usuario?.pessoa || null
+        usuario?.pessoa
       ),
       dataCadastro: new FormControl(
         usuario?.dataCadastro || new Date().toISOString(),
@@ -51,11 +75,7 @@ export class UsuarioCadastroComponent implements OnInit {
       dataAtualizacao: new FormControl(usuario?.dataAtualizacao || new Date().toISOString()),
       dataUltimoAcesso: new FormControl(usuario?.dataUltimoAcesso || new Date().toISOString()),
       ativo: new FormControl(
-        usuario?.ativo || true,
-        Validators.required
-      ),
-      cliente: new FormControl(
-        usuario?.ativo || true,
+        usuario?.ativo,
         Validators.required
       ),
       administrador: new FormControl(
@@ -70,7 +90,7 @@ export class UsuarioCadastroComponent implements OnInit {
       id: this.usuarioId,
     };
     this.usuarioService.salvar(usuario).subscribe(
-      () => this.router.navigate(['usuarios']),
+      () => this.router.navigate(['usuario']),
       (erro) => {
         console.error(erro);
         this.toastController
@@ -87,5 +107,9 @@ export class UsuarioCadastroComponent implements OnInit {
 
   get nome() {
     return this.usuarioForm.get('nome');
+  }
+
+  get email() {
+    return this.usuarioForm.get('email');
   }
 }

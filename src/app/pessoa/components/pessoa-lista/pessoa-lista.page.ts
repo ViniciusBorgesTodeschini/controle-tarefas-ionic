@@ -83,4 +83,8 @@ export class PessoaPage implements OnInit {
       );
     }
   }
+
+  setPessoas(event: any) {
+    this.pessoas = event;
+  }
 }

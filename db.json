@@ -1,19 +1,170 @@
 {
   "atendimento-assunto": [
-    { "id": 1, "nome": "Folha de pagamento" },
-
-    { "id": 2, "nome": "Nota fiscal" },
-
-    { "id": 3, "nome": "MEI" }
-  ],
-  "comments": [
     {
       "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "nome": "Folha de pagamento"
+    },
+    {
+      "id": 2,
+      "nome": "Nota fiscal"
+    },
+    {
+      "nome": "Relatório",
+      "id": 3
     }
   ],
-  "profile": {
-    "name": "typicode"
-  }
+  "cidades": [
+    {
+      "nome": "Icara",
+      "estado": "Acre",
+      "id": 1
+    },
+    {
+      "nome": "Criciuma",
+      "estado": "Acre",
+      "id": 2
+    },
+    {
+      "nome": "Cocal do Sul",
+      "estado": "Santa Catarina",
+      "id": 3
+    }
+  ],
+  "departamento": [
+    {},
+    {
+      "id": 1,
+      "nome": "Fiscal"
+    },
+    {
+      "id": 2,
+      "nome": "Pessoal"
+    },
+    {
+      "nome": "Contabil",
+      "id": 3
+    }
+  ],
+  "atendimento-meio": [
+    {
+      "nome": "Telefone",
+      "id": 1
+    },
+    {
+      "id": 2,
+      "nome": "Pessoalmente"
+    },
+    {
+      "nome": "e-mail",
+      "id": 3
+    },
+    {
+      "nome": "Visita em loco",
+      "id": 4
+    }
+  ],
+  "pessoa": [
+    {},
+    {
+      "id": 1,
+      "nome": "PJ do Escritório",
+      "email": "meu.escritorio@gmail.com",
+      "tipo_pessoa": "PJ",
+      "documento": "000010010000101",
+      "endereco": "rua x, 0010",
+      "telefone": "4834321111",
+      "cidade": {
+        "id": 1,
+        "nome": "ICARA",
+        "estado": "SC"
+      },
+      "ativo": true,
+      "cliente": false,
+      "departamento": null,
+      "pessoa": null
+    },
+    {
+      "nome": "José - Atendente do escritório",
+      "tipo": "Pessoa física",
+      "documento": "00100100101",
+      "endereco": "rua a, 001",
+      "telefone": "4834321111",
+      "ativo": true,
+      "cliente": false,
+      "cidade": {
+        "id": 1,
+        "nome": "ICARA",
+        "estado": "SC"
+      },
+      "departamento": {
+        "id": 1,
+        "nome": "FISCAL"
+      },
+      "pessoa": 1,
+      "id": 2
+    },
+    {
+      "nome": "Loja de Informática seu Zé",
+      "tipo": "Pessoa jurídica",
+      "documento": "00000171000101",
+      "endereco": "Rua da praça, 125",
+      "telefone": "48343222222",
+      "ativo": true,
+      "cliente": true,
+      "cidade": {
+        "id": 1,
+        "nome": "Icara",
+        "estado": "SC"
+      },
+      "departamento": "",
+      "pessoa": "",
+      "id": 3
+    }
+  ],
+  "usuario": [
+    {
+      "nome": "user_fiscal",
+      "email": "email@gmail.com",
+      "pessoa": 2,
+      "dataCadastro": "2023-11-26T18:19:43.062Z",
+      "dataAtualizacao": "2023-11-26T18:19:43.062Z",
+      "dataUltimoAcesso": "2023-11-26T18:19:43.062Z",
+      "ativo": true,
+      "administrador": null,
+      "id": 1
+    },
+    {
+      "nome": "user_pessoal",
+      "email": "email1@gmail.com",
+      "pessoa": 2,
+      "dataCadastro": "2023-11-26T18:19:29.755Z",
+      "dataAtualizacao": "2023-11-26T18:19:29.755Z",
+      "dataUltimoAcesso": "2023-11-26T18:19:29.756Z",
+      "ativo": true,
+      "administrador": null,
+      "id": 2
+    }
+  ],
+  "atendimento": [
+    {
+      "detalhes": "maria solicou ajuda para emitir notas fiscais",
+      "assunto": {},
+      "meio": 1,
+      "inicioAtendimento": null,
+      "fimAtendimento": "2023-11-28T20:27:00",
+      "solicitante": 3,
+      "atendente": 2,
+      "id": 1
+    },
+    {
+      "detalhes": "joao",
+      "assunto": {},
+      "meio": 1,
+      "inicioAtendimento": "2023-11-28T16:05:00",
+      "fimAtendimento": "2023-11-30T15:04:00",
+      "solicitante": 2,
+      "atendente": 2,
+      "id": 2
+    }
+  ]
 }

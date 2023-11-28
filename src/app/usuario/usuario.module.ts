@@ -6,6 +6,8 @@ import { UsuarioPageRoutingModule } from "./usuario-routing.module";
 import { HttpClientModule } from "@angular/common/http";
 import { UsuarioPage } from "./components/usuario-lista/usuario-lista.page";
 import { UsuarioCadastroComponent } from "./components/usuario-cadastro/usuario-cadastro.component";
+import { FooterToolbarModule } from "../common/components/footer-toolbar/footer-toolbar.module";
+import { SearchInputModule } from "../common/components/seach-input/search-input.module";
 
 @NgModule({
     imports: [
@@ -14,7 +16,9 @@ import { UsuarioCadastroComponent } from "./components/usuario-cadastro/usuario-
       CommonModule,
       IonicModule,
       UsuarioPageRoutingModule,
-      HttpClientModule
+      HttpClientModule,
+      FooterToolbarModule,
+      SearchInputModule
     ],
     declarations: [UsuarioPage, UsuarioCadastroComponent],
     exports:[UsuarioPage]

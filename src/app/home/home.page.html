@@ -1,17 +1,50 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-input type="search" placeholder="pesquisar..." class="search-input"></ion-input>
+<ion-header>
+  <ion-toolbar color="danger tint">
+    <ion-icon
+      slot="start"
+      name="file-tray-full-outline"
+      class="header-icon"
+    ></ion-icon>
+    <ion-title>Mark Do</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <div class="banner">
+    <ion-img
+      src="https://dsipublicacoes.com.br/wp-content/uploads/2022/12/contabilidade-4.0-700x400.jpg"
+      alt="Contabilidade automatizada"
+    ></ion-img>
+  </div>
+  <div class="main">
+    <div class="homepage--container">
+      <ion-card class="card" (click)="navigate('/atendimento')">
+        <ion-card-header>
+          <ion-icon name="clipboard-outline"></ion-icon>
+          <p>Atendimentos</p>
+        </ion-card-header>
+      </ion-card>
+      <ion-card class="card" (click)="navigate('/usuario')">
+        <ion-card-header>
+          <ion-icon name="person-outline"></ion-icon>
+          <p>Usuarios</p>
+        </ion-card-header>
+      </ion-card>
+    </div>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <div class="homepage--container">
+      <ion-card class="card" (click)="navigate('/departamento')">
+        <ion-card-header>
+          <ion-icon name="business-outline"></ion-icon>
+          <p>Departamentos</p>
+        </ion-card-header>
+      </ion-card>
+      <ion-card class="card" (click)="navigate('/atendimento-meio')">
+        <ion-card-header>
+          <ion-icon name="desktop-outline"></ion-icon>
+          <p>Meios de atendimento</p>
+        </ion-card-header>
+      </ion-card>
+    </div>
   </div>
 </ion-content>
-
-<app-footer-toolbar></app-footer-toolbar>
-
-

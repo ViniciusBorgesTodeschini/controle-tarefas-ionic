@@ -2,15 +2,16 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { IonicModule } from "@ionic/angular";
-import { FooterToolbar } from "./footer-toolbar.page";
+import { SearchInput } from "./search-input";
 
 @NgModule({
     imports: [
       CommonModule,
       FormsModule,
-      IonicModule
+      IonicModule,
     ],
-    declarations: [FooterToolbar],
-    exports: [FooterToolbar]
+    declarations: [SearchInput],
+    exports: [SearchInput]
   })
-  export class FooterToolbarModule {}
+
+export class SearchInputModule {}

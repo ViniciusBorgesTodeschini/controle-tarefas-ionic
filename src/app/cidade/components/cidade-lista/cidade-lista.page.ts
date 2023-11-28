@@ -83,4 +83,8 @@ export class CidadePage implements OnInit {
       );
     }
   }
+
+  setCidades(event: any) {
+    this.cidades = event;
+  }
 }

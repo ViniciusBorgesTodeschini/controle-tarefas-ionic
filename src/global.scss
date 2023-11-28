@@ -24,3 +24,70 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+
+.add-button {
+    margin-bottom: 1rem;
+}
+
+.card {
+    max-width: 100%;
+    width: 100%;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    flex: 1;
+  overflow-y: auto;
+}
+
+.buttons--container {
+    margin-bottom: 0.5rem;
+    float: right;
+}
+
+ion-button.custom-button {
+    --border-radius: 8px !important;
+    margin-right: 0.5rem;
+    --width: 60%;
+}
+
+ion-input {
+    border-radius: 8px !important;
+    border: 1px solid #E3E6EF !important;
+}
+
+ion-textarea {
+    border-radius: 8px !important;
+    border: 1px solid #E3E6EF !important;
+}
+
+ion-select {
+    border-radius: 8px !important;
+    border: 1px solid #E3E6EF !important;
+    width: 100%;
+}
+
+ion-select-option {
+    width: 100% !important;
+}
+
+.input-item--container {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-label {
+    margin-left: 1rem;
+    margin-bottom: 0;
+}
+
+.header-icon {
+    font-size: 2rem;
+    margin-left: 0.8rem;
+}
+
+.salvar-form--button {
+    float: right;
+    margin: 2rem 1rem 0.5rem 1rem !important;
+    padding-bottom: 1rem !important;
+    width: 40%;
+}

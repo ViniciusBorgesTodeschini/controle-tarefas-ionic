@@ -83,4 +83,8 @@ export class UsuarioPage implements OnInit {
       );
     }
   }
+
+  setUsuarios(event: any) {
+    this.usuarios = event;
+  }
 }
