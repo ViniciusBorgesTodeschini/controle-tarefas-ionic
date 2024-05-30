@@ -96,6 +96,10 @@
           </ng-template>
         </ion-modal>
       </ion-item>
+
+      <small *ngIf="atendimentoForm.get('inicioAtendimento')?.errors?.['dataInvalida']">
+        A data não pode ser maior que a data atual
+      </small>      
     </div>
 
     <div class="input-item--container">
@@ -109,13 +113,17 @@
           </ng-template>
         </ion-modal>
       </ion-item>
+
+      <small *ngIf="atendimentoForm.get('fimAtendimento')?.errors?.['dataInvalida']">
+        A data não pode ser maior que a data atual
+      </small>      
     </div>
 
     <div class="input-item--container">
       <ion-label class="input-label">Detalhes:</ion-label>
       <ion-item lines="none">
         <ion-textarea
-          id="detalhe"
+          id="detalhes"
           placeholder="Informe os detalhes do atendimento..."
           formControlName="detalhes"
         >
@@ -126,14 +134,14 @@
           *ngIf="detalhes?.invalid && (detalhes?.dirty || detalhes?.touched)"
         >
           <small *ngIf="detalhes?.errors?.['required']">
-            O campo descrição é obrigatório
+            O campo detalhes é obrigatório
           </small>
           <small *ngIf="detalhes?.errors?.['minlength']">
-            O campo descrição deve conter no mínimo
+            O campo detalhes deve conter no mínimo
             {{ detalhes?.errors?.['minlength'].requiredLength }} caracteres
           </small>
           <small *ngIf="detalhes?.errors?.['maxlength']">
-            O campo descrição deve conter no máximo
+            O campo detalhes deve conter no máximo
             {{ detalhes?.errors?.['maxlength'].requiredLength }} caracteres
           </small>
         </ion-text>

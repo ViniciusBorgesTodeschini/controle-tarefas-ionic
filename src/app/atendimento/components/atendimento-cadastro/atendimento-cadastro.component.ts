@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
 import { AtendimentoInterface } from '../../types/atendimento.interface';
 import { AtendimentoService } from '../../services/atendimento.service';
-import { MaskitoOptions } from '@maskito/core';
 import { AtendimentoAssuntoInterface } from '../../atendimento-assunto/types/atendimento-assunto.interface';
 import { AtendimentoAssuntoService } from '../../atendimento-assunto/services/atendimento-assunto.service';
 import { AtendimentoMeioInterface } from '../../atendimento-meio/types/atendimento-meio.interface';
@@ -13,13 +11,15 @@ import { PessoaInterface } from 'src/app/pessoa/types/pessoa.interface';
 import { PessoaService } from 'src/app/pessoa/services/pessoa.service';
 import { UsuarioInterface } from 'src/app/usuario/types/usuario.interface';
 import { UsuarioService } from 'src/app/usuario/services/usuario.service';
+import { AlertService } from 'src/app/core/services/alert.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-atendimento-cadastro',
   templateUrl: './atendimento-cadastro.component.html',
   styleUrls: ['./atendimento-cadastro.component.scss'],
 })
-export class AtendimentoCadastroComponent implements OnInit {
+export class AtendimentoCadastroComponent implements OnInit, OnDestroy {
   atendimentoId: number | null;
   atendimentoForm: FormGroup;
   assuntos: Array<AtendimentoAssuntoInterface> = [];
@@ -32,15 +32,17 @@ export class AtendimentoCadastroComponent implements OnInit {
   selectedAtendente: UsuarioInterface | null = {} as UsuarioInterface;
   assunto: AtendimentoAssuntoInterface = {} as AtendimentoAssuntoInterface;
 
+  private subscriptions = new Subscription();
+
   constructor(
-    private toastController: ToastController,
     private activatedRoute: ActivatedRoute,
     private atendimentoService: AtendimentoService,
     private atendimentoAssuntoService: AtendimentoAssuntoService,
     private atendimentoMeioService: AtendimentoMeioService,
     private pessoaService: PessoaService,
     private usuarioService: UsuarioService,
-    private router: Router
+    private router: Router,
+    private alertService: AlertService,
   ) {
     this.atendimentoId = null;
     this.atendimentoForm = this.createForm();
@@ -54,14 +56,23 @@ export class AtendimentoCadastroComponent implements OnInit {
     this.getAtendentes();
     if (id) {
       this.atendimentoId = parseInt(id);
-      this.atendimentoService.getAtendimento(this.atendimentoId).subscribe((atendimento) => {
-        this.selectedAssunto = atendimento.assunto;
-        this.selectedMeio = atendimento.meio;
-        this.selectedSolicitante = atendimento.solicitante;
-        this.selectedAtendente = atendimento.atendente;
-        this.atendimentoForm = this.createForm(atendimento);
-      });
+      this.subscriptions.add(
+        this.atendimentoService.getAtendimento(this.atendimentoId).subscribe((atendimento) => {
+          this.selectedAssunto = atendimento.assunto;
+          this.selectedMeio = atendimento.meio;
+          this.selectedSolicitante = atendimento.solicitante;
+          this.selectedAtendente = atendimento.atendente;
+          this.atendimentoForm = this.createForm(atendimento);
+        }, (error) => {
+          this.alertService.error('Não foi possível carregar os dados do atendimento!')
+          console.error(error)
+        })
+      )
     }
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
   getAssuntos() {
@@ -71,6 +82,7 @@ export class AtendimentoCadastroComponent implements OnInit {
       },
       (erro) => {
         console.error(erro);
+        this.alertService.error('Não foi possível carregar os assuntos de atendimento. Tente novamente mais tarde')
       }
     );
   }
@@ -82,6 +94,7 @@ export class AtendimentoCadastroComponent implements OnInit {
       },
       (erro) => {
         console.error(erro);
+        this.alertService.error('Não foi possível carregar os meios de atendimento. Tente novamente mais tarde')
       }
     );
   }
@@ -93,6 +106,7 @@ export class AtendimentoCadastroComponent implements OnInit {
       },
       (erro) => {
         console.error(erro);
+        this.alertService.error('Não foi possível carregar os solicitantes. Tente novamente mais tarde')
       }
     );
   }
@@ -104,8 +118,17 @@ export class AtendimentoCadastroComponent implements OnInit {
       },
       (erro) => {
         console.error(erro);
+        this.alertService.error('Não foi possível carregar os atendentes. Tente novamente mais tarde')
       }
     );
+  }
+
+  private dataAtualValidator: ValidatorFn = (control: AbstractControl<any, any>): ValidationErrors | null => {
+    const dataAtual = new Date();
+    if (control.value && control.value > dataAtual) {
+      return { dataInvalida: true }
+    }
+    return null;
   }
 
   private createForm(atendimento?: AtendimentoInterface) {
@@ -125,9 +148,11 @@ export class AtendimentoCadastroComponent implements OnInit {
       ),
       inicioAtendimento: new FormControl(
         atendimento?.inicioAtendimento || null,
+        this.dataAtualValidator
       ),
       fimAtendimento: new FormControl(
         atendimento?.fimAtendimento || null,
+        this.dataAtualValidator
       ),
       solicitante: new FormControl(
         atendimento?.solicitante || null,
@@ -150,17 +175,10 @@ export class AtendimentoCadastroComponent implements OnInit {
       () => this.router.navigate(['atendimento']),
       (erro) => {
         console.error(erro);
-        this.toastController
-          .create({
-            message: `Não foi possível salvar a atendimento ${atendimento.detalhes}`,
-            duration: 5000,
-            keyboardClose: true,
-            color: 'danger',
-          })
-          .then((t) => t.present());
+        this.alertService.error(`Não foi possível salvar o atendimento`);
       }
     );
-    }
+  }
 
   get detalhes() {
     return this.atendimentoForm.get('detalhes');

@@ -1,24 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
 import { DepartamentoInterface } from '../../types/departamento.interface';
 import { DepartamentoService } from '../../services/departamento.service';
+import { Subscription } from 'rxjs';
+import { AlertService } from 'src/app/core/services/alert.service';
 
 @Component({
   selector: 'app-departamento-cadastro',
   templateUrl: './departamento-cadastro.component.html',
   styleUrls: ['./departamento-cadastro.component.scss']
 })
-export class DepartamentoCadastroComponent implements OnInit {
+export class DepartamentoCadastroComponent implements OnInit, OnDestroy {
   departamentoId: number | null;
   departamentoForm: FormGroup;
+  private subscriptions = new Subscription();
 
   constructor(
-    private toastController: ToastController,
     private activatedRoute: ActivatedRoute,
     private departamentoService: DepartamentoService,
-    private router: Router
+    private router: Router,
+    private alertService: AlertService,
   ) {
     this.departamentoId = null;
     this.departamentoForm = this.createForm();
@@ -28,10 +30,19 @@ export class DepartamentoCadastroComponent implements OnInit {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id) {
       this.departamentoId = parseInt(id);
-      this.departamentoService.getDepartamento(this.departamentoId).subscribe((departamento) => {
-        this.departamentoForm = this.createForm(departamento);
-      });
+      this.subscriptions.add(
+        this.departamentoService.getDepartamento(this.departamentoId).subscribe((departamento) => {
+          this.departamentoForm = this.createForm(departamento);
+        }, (error) => {
+          this.alertService.error('Não foi possível carregar os dados do departamento!')
+          console.error(error)
+        })
+      )
     }
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
   private createForm(departamento?: DepartamentoInterface) {
@@ -53,14 +64,7 @@ export class DepartamentoCadastroComponent implements OnInit {
       () => this.router.navigate(['departamento']),
       (erro) => {
         console.error(erro);
-        this.toastController
-          .create({
-            message: `Não foi possível salvar o departamento ${departamento.nome}`,
-            duration: 5000,
-            keyboardClose: true,
-            color: 'danger',
-          })
-          .then((t) => t.present());
+        this.alertService.error(`Não foi possível salvar o departamento ${departamento.nome}`);
       }
     );
   }

@@ -1,24 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
 import { AtendimentoMeioInterface } from '../../types/atendimento-meio.interface';
 import { AtendimentoMeioService } from '../../services/atendimento-meio.service';
+import { Subscription } from 'rxjs';
+import { AlertService } from 'src/app/core/services/alert.service';
 
 @Component({
   selector: 'app-atendimento-meio-cadastro',
   templateUrl: './atendimento-meio-cadastro.component.html',
   styleUrls: ['./atendimento-meio-cadastro.component.scss']
 })
-export class AtendimentoMeioCadastroComponent implements OnInit {
+export class AtendimentoMeioCadastroComponent implements OnInit, OnDestroy {
   atendimentoMeioId: number | null;
   atendimentoMeioForm: FormGroup;
+  private subscriptions = new Subscription();
 
   constructor(
-    private toastController: ToastController,
     private activatedRoute: ActivatedRoute,
     private atendimentoMeioService: AtendimentoMeioService,
-    private router: Router
+    private router: Router,
+    private alertService: AlertService,
   ) {
     this.atendimentoMeioId = null;
     this.atendimentoMeioForm = this.createForm();
@@ -28,11 +30,20 @@ export class AtendimentoMeioCadastroComponent implements OnInit {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id) {
       this.atendimentoMeioId = parseInt(id);
-      this.atendimentoMeioService.getAtendimentoMeio(this.atendimentoMeioId).subscribe((antendimentoMeio) => {
-        this.atendimentoMeioForm = this.createForm(antendimentoMeio);
-      });
+      this.subscriptions.add(
+        this.atendimentoMeioService.getAtendimentoMeio(this.atendimentoMeioId).subscribe((antendimentoMeio) => {
+          this.atendimentoMeioForm = this.createForm(antendimentoMeio);
+        }, (error) => {
+          this.alertService.error('Não foi possível carregar os dados do meio de atendimento!')
+          console.error(error)
+        })
+      )
     }
   }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }  
 
   private createForm(meio?: AtendimentoMeioInterface) {
     return new FormGroup({
@@ -53,14 +64,7 @@ export class AtendimentoMeioCadastroComponent implements OnInit {
       () => this.router.navigate(['atendimento-meio']),
       (erro) => {
         console.error(erro);
-        this.toastController
-          .create({
-            message: `Não foi possível salvar o meio de atendimento ${meio.nome}`,
-            duration: 5000,
-            keyboardClose: true,
-            color: 'danger',
-          })
-          .then((t) => t.present());
+        this.alertService.error(`Não foi possível salvar o meio de atendimento ${meio.nome}`);
       }
     );
   }

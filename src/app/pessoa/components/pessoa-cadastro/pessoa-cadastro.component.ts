@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
 import { PessoaInterface } from '../../types/pessoa.interface';
 import { PessoaService } from '../../services/pessoa.service';
 import { TipoPessoaEnum } from '../../types/tipo-pessoa.enum';
@@ -9,13 +8,15 @@ import { CidadeInterface } from 'src/app/cidade/types/cidade.interface';
 import { CidadeService } from 'src/app/cidade/services/cidade.service';
 import { DepartamentoInterface } from 'src/app/departamento/types/departamento.interface';
 import { DepartamentoService } from 'src/app/departamento/services/departamento.service';
+import { Subscription } from 'rxjs';
+import { AlertService } from 'src/app/core/services/alert.service';
 
 @Component({
   selector: 'app-pessoa-cadastro',
   templateUrl: './pessoa-cadastro.component.html',
   styleUrls: ['./pessoa-cadastro.component.scss']
 })
-export class PessoaCadastroComponent implements OnInit {
+export class PessoaCadastroComponent implements OnInit, OnDestroy {
   pessoaId: number | null;
   pessoaForm: FormGroup;
   tiposPessoa: Array<any>;
@@ -26,13 +27,15 @@ export class PessoaCadastroComponent implements OnInit {
   selectedDepartamento: DepartamentoInterface | null = {} as DepartamentoInterface;
   selectedCidade: CidadeInterface = {} as CidadeInterface;
 
+  private subscriptions = new Subscription();
+
   constructor(
-    private toastController: ToastController,
     private activatedRoute: ActivatedRoute,
     private pessoaService: PessoaService,
     private router: Router,
     private cidadeService: CidadeService,
-    private departamentoService: DepartamentoService
+    private departamentoService: DepartamentoService,
+    private alertService: AlertService,
   ) {
     this.pessoaId = null;
     this.pessoaForm = this.createForm();
@@ -46,13 +49,22 @@ export class PessoaCadastroComponent implements OnInit {
     this.getPessoas();
     if (id) {
       this.pessoaId = parseInt(id);
-      this.pessoaService.getPessoa(this.pessoaId).subscribe((pessoa) => {
-        this.selectedCidade = pessoa.cidade;
-        this.selectedDepartamento = pessoa?.departamento;
-        this.selectedPessoa = pessoa.pessoa;
-        this.pessoaForm = this.createForm(pessoa);
-      });
+      this.subscriptions.add(
+        this.pessoaService.getPessoa(this.pessoaId).subscribe((pessoa) => {
+          this.selectedCidade = pessoa.cidade;
+          this.selectedDepartamento = pessoa?.departamento;
+          this.selectedPessoa = pessoa.pessoa;
+          this.pessoaForm = this.createForm(pessoa);
+        }, (error) => {
+          this.alertService.error('Não foi possível carregar os dados da pessoa!')
+          console.error(error)
+        })
+      )
     }
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
   getCidades() {
@@ -62,14 +74,16 @@ export class PessoaCadastroComponent implements OnInit {
       },
       (erro) => {
         console.error(erro);
+        this.alertService.error('Não foi possível carregar as cidades. Tente novamente mais tarde')
       }
     );
   }
-  
+
   getDepartamentos() {
     this.departamentoService.getDepartamentos().subscribe(
       (dados) => {
         this.departamentos = dados;
+        this.alertService.error('Não foi possível carregar os departamentos. Tente novamente mais tarde')
       },
       (erro) => {
         console.error(erro);
@@ -84,6 +98,7 @@ export class PessoaCadastroComponent implements OnInit {
       },
       (erro) => {
         console.error(erro);
+        this.alertService.error('Não foi possível carregar as pessoas. Tente novamente mais tarde')
       }
     );
   }
@@ -117,7 +132,7 @@ export class PessoaCadastroComponent implements OnInit {
         Validators.required
       ),
       cliente: new FormControl(
-        pessoa?.cliente ,
+        pessoa?.cliente,
         Validators.required
       ),
       cidade: new FormControl(
@@ -125,10 +140,10 @@ export class PessoaCadastroComponent implements OnInit {
         Validators.required
       ),
       departamento: new FormControl(
-        pessoa?.departamento 
+        pessoa?.departamento
       ),
       pessoa: new FormControl(
-        pessoa?.pessoa 
+        pessoa?.pessoa
       )
     });
   }
@@ -142,14 +157,7 @@ export class PessoaCadastroComponent implements OnInit {
       () => this.router.navigate(['pessoa']),
       (erro) => {
         console.error(erro);
-        this.toastController
-          .create({
-            message: `Não foi possível salvar a pessoa ${pessoa.nome}`,
-            duration: 5000,
-            keyboardClose: true,
-            color: 'danger',
-          })
-          .then((t) => t.present());
+        this.alertService.error(`Não foi possível salvar a pessoa ${pessoa.nome}`);
       }
     );
   }
