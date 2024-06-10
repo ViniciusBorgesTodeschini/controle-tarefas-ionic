@@ -67,7 +67,7 @@ export class AtendimentoCadastroComponent implements OnInit {
   getAssuntos() {
     this.atendimentoAssuntoService.getAtendimentosAssuntos().subscribe(
       (dados) => {
-        this.assuntos = dados;
+        this.assuntos = dados.list;
       },
       (erro) => {
         console.error(erro);

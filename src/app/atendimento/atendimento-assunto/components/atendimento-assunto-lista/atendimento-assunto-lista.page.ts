@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, MenuController, ToastController } from '@ionic/angular';
+import { AlertController, InfiniteScrollCustomEvent, MenuController, ToastController } from '@ionic/angular';
 import { AtendimentoAssuntoInterface } from '../../types/atendimento-assunto.interface';
 import { AtendimentoAssuntoService } from '../../services/atendimento-assunto.service';
+import { Page } from 'src/app/common/types/types';
 
 @Component({
   selector: 'app-atendimento-assunto',
@@ -10,6 +11,12 @@ import { AtendimentoAssuntoService } from '../../services/atendimento-assunto.se
 })
 export class AtendimentoAssuntoPage implements OnInit {
   assuntos: AtendimentoAssuntoInterface[] = [];
+  page: Page<AtendimentoAssuntoInterface> = {
+    list: [],
+    page: 1,
+    rpp: 10,
+    totalCount: 0
+  };
 
   constructor(
     private alertController: AlertController,
@@ -40,12 +47,36 @@ export class AtendimentoAssuntoPage implements OnInit {
   listar() {
     this.atendimentoAssuntoService.getAtendimentosAssuntos().subscribe(
       (dados) => {
-        this.assuntos = dados;
+        this.page = dados;
+        this.assuntos = dados.list;
       },
       (erro) => {
         console.error(erro);
       }
     );
+  }
+
+  changePage() {
+    const params = {
+      page: this.page.page + 1,
+      rpp: 10
+    }
+    this.atendimentoAssuntoService.getAtendimentosAssuntos(params).subscribe(
+      (dados) => {
+        this.page = dados;
+        this.assuntos.push(...dados.list);
+      }, 
+      (erro) => {
+        console.error(erro);
+      }
+    )
+  }
+
+  paginate(ev: any) {
+    setTimeout(() => {
+      this.changePage();
+      (ev as InfiniteScrollCustomEvent).target.complete();
+    }, 1000);
   }
 
   confirmarExclusao(assunto: AtendimentoAssuntoInterface) {

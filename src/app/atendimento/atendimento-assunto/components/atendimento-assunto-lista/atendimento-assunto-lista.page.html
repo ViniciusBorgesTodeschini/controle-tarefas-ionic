@@ -37,6 +37,9 @@
           </ion-buttons>
         </ion-card>
       </ion-item>
+      <ion-infinite-scroll (ionInfinite)="paginate($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
     </div>
   </ion-list>
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
