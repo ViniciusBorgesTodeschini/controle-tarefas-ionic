@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 import { PessoaInterface } from '../../types/pessoa.interface';
 import { PessoaService } from '../../services/pessoa.service';
+import { AlertService } from 'src/app/core/services/alert.service';
 
 @Component({
   selector: 'app-pessoa',
@@ -13,8 +14,8 @@ export class PessoaPage implements OnInit {
 
   constructor(
     private alertController: AlertController,
-    private toastController: ToastController,
-    private pessoaService: PessoaService
+    private pessoaService: PessoaService,
+    private alertService: AlertService
   ) {}
 
   ionViewWillEnter() {
@@ -43,6 +44,7 @@ export class PessoaPage implements OnInit {
       },
       (erro) => {
         console.error(erro);
+        this.alertService.error('Erro ao carregar listagem de pessoas');
       }
     );
   }
@@ -71,14 +73,7 @@ export class PessoaPage implements OnInit {
         () => this.listar(),
         (erro) => {
           console.error(erro);
-          this.toastController
-            .create({
-              message: `Não foi possível excluir a pessoa ${pessoa.nome}`,
-              duration: 5000,
-              keyboardClose: true,
-              color: 'danger',
-            })
-            .then((t) => t.present());
+          this.alertService.error(`Não foi possível excluir a pessoa ${pessoa.nome}`);
         }
       );
     }

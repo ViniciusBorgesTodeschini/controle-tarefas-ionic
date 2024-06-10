@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 import { DepartamentoInterface } from '../../types/departamento.interface';
 import { DepartamentoService } from '../../services/departamento.service';
+import { AlertService } from 'src/app/core/services/alert.service';
 
 @Component({
   selector: 'app-departamento',
@@ -13,8 +14,8 @@ export class DepartamentoPage implements OnInit {
 
   constructor(
     private alertController: AlertController,
-    private toastController: ToastController,
-    private departamentoService: DepartamentoService
+    private departamentoService: DepartamentoService,
+    private alertService: AlertService
   ) {}
 
   ionViewWillEnter() {
@@ -43,6 +44,7 @@ export class DepartamentoPage implements OnInit {
       },
       (erro) => {
         console.error(erro);
+        this.alertService.error('Erro ao carregar listagem de departamentos');
       }
     );
   }
@@ -71,14 +73,7 @@ export class DepartamentoPage implements OnInit {
         () => this.listar(),
         (erro) => {
           console.error(erro);
-          this.toastController
-            .create({
-              message: `Não foi possível excluir o departamento ${departamento.nome}`,
-              duration: 5000,
-              keyboardClose: true,
-              color: 'danger',
-            })
-            .then((t) => t.present());
+          this.alertService.error(`Não foi possível excluir o assunto ${departamento.nome}`);
         }
       );
     }

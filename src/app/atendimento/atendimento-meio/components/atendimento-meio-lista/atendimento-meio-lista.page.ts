@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 import { AtendimentoMeioInterface } from '../../types/atendimento-meio.interface';
 import { AtendimentoMeioService } from '../../services/atendimento-meio.service';
+import { AlertService } from 'src/app/core/services/alert.service';
 
 @Component({
   selector: 'app-atendimento-meio',
@@ -13,7 +14,7 @@ export class AtendimentoMeioPage implements OnInit {
 
   constructor(
     private alertController: AlertController,
-    private toastController: ToastController,
+    private alertService: AlertService,
     private atendimentoMeioService: AtendimentoMeioService
   ) {}
 
@@ -43,6 +44,7 @@ export class AtendimentoMeioPage implements OnInit {
       },
       (erro) => {
         console.error(erro);
+        this.alertService.error('Erro ao carregar listagem de meio de atendimento');
       }
     );
   }
@@ -71,14 +73,7 @@ export class AtendimentoMeioPage implements OnInit {
         () => this.listar(),
         (erro) => {
           console.error(erro);
-          this.toastController
-            .create({
-              message: `Não foi possível excluir o assunto ${meio.nome}`,
-              duration: 5000,
-              keyboardClose: true,
-              color: 'danger',
-            })
-            .then((t) => t.present());
+          this.alertService.error(`Não foi possível excluir o meio de atendimento ${meio.nome}`);
         }
       );
     }

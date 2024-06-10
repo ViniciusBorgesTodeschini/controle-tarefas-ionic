@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 import { UsuarioInterface } from '../../types/usuario.interface';
 import { UsuarioService } from '../../services/usuario.service';
+import { AlertService } from 'src/app/core/services/alert.service';
 
 @Component({
   selector: 'app-usuario',
@@ -13,8 +14,8 @@ export class UsuarioPage implements OnInit {
 
   constructor(
     private alertController: AlertController,
-    private toastController: ToastController,
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
+    private alertService: AlertService
   ) {}
 
   ionViewWillEnter() {
@@ -43,6 +44,7 @@ export class UsuarioPage implements OnInit {
       },
       (erro) => {
         console.error(erro);
+        this.alertService.error('Erro ao carregar listagem de usuários');
       }
     );
   }
@@ -71,14 +73,7 @@ export class UsuarioPage implements OnInit {
         () => this.listar(),
         (erro) => {
           console.error(erro);
-          this.toastController
-            .create({
-              message: `Não foi possível excluir a usuario ${usuario.nome}`,
-              duration: 5000,
-              keyboardClose: true,
-              color: 'danger',
-            })
-            .then((t) => t.present());
+          this.alertService.error(`Não foi possível excluir o usuário ${usuario.nome}`);
         }
       );
     }

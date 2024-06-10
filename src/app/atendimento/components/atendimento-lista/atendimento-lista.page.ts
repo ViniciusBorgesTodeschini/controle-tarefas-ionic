@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 import { AtendimentoInterface } from '../../types/atendimento.interface';
 import { AtendimentoService } from '../../services/atendimento.service';
-import { AtendimentoAssuntoService } from '../../atendimento-assunto/services/atendimento-assunto.service';
 import { AtendimentoAssuntoInterface } from '../../atendimento-assunto/types/atendimento-assunto.interface';
+import { AlertService } from 'src/app/core/services/alert.service';
 
 @Component({
   selector: 'app-atendimento',
@@ -16,9 +16,8 @@ export class AtendimentoPage implements OnInit {
 
   constructor(
     private alertController: AlertController,
-    private toastController: ToastController,
     private atendimentoService: AtendimentoService,
-    private assuntoService: AtendimentoAssuntoService
+    private alertService: AlertService
   ) {}
 
   ionViewWillEnter() {
@@ -47,6 +46,7 @@ export class AtendimentoPage implements OnInit {
         },
         (erro) => {
           console.error(erro);
+          this.alertService.error('Erro ao carregar listagem de atendimentos');
         }
     );
   }
@@ -75,14 +75,7 @@ export class AtendimentoPage implements OnInit {
         () => this.listar(),
         (erro) => {
           console.error(erro);
-          this.toastController
-            .create({
-              message: `Não foi possível excluir a atendimento ${atendimento.assunto}`,
-              duration: 5000,
-              keyboardClose: true,
-              color: 'danger',
-            })
-            .then((t) => t.present());
+          this.alertService.error(`Não foi possível excluir a atendimento ${atendimento.assunto}`);
         }
       );
     }

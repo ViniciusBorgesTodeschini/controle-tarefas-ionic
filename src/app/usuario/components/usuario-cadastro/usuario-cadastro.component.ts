@@ -1,29 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
 import { UsuarioInterface } from '../../types/usuario.interface';
 import { UsuarioService } from '../../services/usuario.service';
 import { PessoaInterface } from 'src/app/pessoa/types/pessoa.interface';
 import { PessoaService } from 'src/app/pessoa/services/pessoa.service';
+import { Subscription } from 'rxjs';
+import { AlertService } from 'src/app/core/services/alert.service';
 
 @Component({
   selector: 'app-usuario-cadastro',
   templateUrl: './usuario-cadastro.component.html',
   styleUrls: ['./usuario-cadastro.component.scss']
 })
-export class UsuarioCadastroComponent implements OnInit {
+export class UsuarioCadastroComponent implements OnInit, OnDestroy {
   usuarioId: number | null;
   usuarioForm: FormGroup;
   pessoas: Array<PessoaInterface> = [];
   selectedPessoa: PessoaInterface = {} as PessoaInterface;
 
+  private subscriptions = new Subscription();
+
   constructor(
-    private toastController: ToastController,
     private activatedRoute: ActivatedRoute,
     private usuarioService: UsuarioService,
     private router: Router,
-    private pessoaService: PessoaService
+    private pessoaService: PessoaService,
+    private alertService: AlertService,
   ) {
     this.usuarioId = null;
     this.usuarioForm = this.createForm();
@@ -34,12 +37,21 @@ export class UsuarioCadastroComponent implements OnInit {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id) {
       this.usuarioId = parseInt(id);
-      this.usuarioService.getUsuario(this.usuarioId).subscribe((usuario) => {
-        this.selectedPessoa = usuario.pessoa;
-        this.usuarioForm = this.createForm(usuario);
-        console.log(this.usuarioForm)
-      });
+      this.subscriptions.add(
+        this.usuarioService.getUsuario(this.usuarioId).subscribe((usuario) => {
+          this.selectedPessoa = usuario.pessoa;
+          this.usuarioForm = this.createForm(usuario);
+          console.log(this.usuarioForm)
+        }, (error) => {
+          this.alertService.error('Não foi possível carregar os dados do usuário!')
+          console.error(error)
+        })
+      )
     }
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
   private getPessoas(): void {
@@ -49,6 +61,7 @@ export class UsuarioCadastroComponent implements OnInit {
       },
       (erro) => {
         console.error(erro);
+        this.alertService.error('Não foi possível carregar as pessoas. Tente novamente mais tarde')
       }
     );
   }
@@ -93,14 +106,7 @@ export class UsuarioCadastroComponent implements OnInit {
       () => this.router.navigate(['usuario']),
       (erro) => {
         console.error(erro);
-        this.toastController
-          .create({
-            message: `Não foi possível salvar a usuario ${usuario.nome}`,
-            duration: 5000,
-            keyboardClose: true,
-            color: 'danger',
-          })
-          .then((t) => t.present());
+        this.alertService.error(`Não foi possível salvar o usuário ${usuario.nome}`);
       }
     );
   }
