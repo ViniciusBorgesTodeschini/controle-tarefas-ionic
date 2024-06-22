@@ -88,11 +88,10 @@ export class UsuarioCadastroComponent implements OnInit, OnDestroy {
       dataAtualizacao: new FormControl(usuario?.dataAtualizacao || new Date().toISOString()),
       dataUltimoAcesso: new FormControl(usuario?.dataUltimoAcesso || new Date().toISOString()),
       ativo: new FormControl(
-        usuario?.ativo,
-        Validators.required
+        usuario?.ativo || false
       ),
       administrador: new FormControl(
-        usuario?.administrador || null
+        usuario?.administrador || false
       )
     });
   }

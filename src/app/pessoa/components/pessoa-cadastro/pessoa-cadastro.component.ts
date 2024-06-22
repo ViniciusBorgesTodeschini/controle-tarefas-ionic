@@ -117,35 +117,29 @@ export class PessoaCadastroComponent implements OnInit, OnDestroy {
         Validators.required
       ),
       documento: new FormControl(pessoa?.documento || '', [
-        Validators.required,
-        Validators.minLength(11),
-        Validators.maxLength(14),
+        Validators.required
       ]),
       endereco: new FormControl(pessoa?.endereco || '', [
         Validators.minLength(0),
         Validators.maxLength(100),
       ]),
       telefone: new FormControl(pessoa?.telefone || '', [
-        Validators.minLength(0),
-        Validators.maxLength(11),
+        Validators.minLength(0)
       ]),
       ativo: new FormControl(
-        pessoa?.ativo,
-        Validators.required
+        pessoa?.ativo || false
       ),
       cliente: new FormControl(
-        pessoa?.cliente,
-        Validators.required
+        pessoa?.cliente || false
       ),
       cidadeId: new FormControl(
-        pessoa?.cidade,
-        Validators.required
+        pessoa?.cidade || null
       ),
       departamentoId: new FormControl(
-        pessoa?.departamento
+        pessoa?.departamento || null
       ),
       pessoaId: new FormControl(
-        pessoa?.pessoa
+        pessoa?.pessoa || null
       )
     });
   }
