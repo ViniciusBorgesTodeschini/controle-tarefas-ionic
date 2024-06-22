@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DepartamentoInterface } from '../types/departamento.interface';
+import { Page } from 'src/app/common/types/types';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,10 @@ export class DepartamentoService {
     private httpClient: HttpClient
   ) {}
 
-  getDepartamentos(): Observable<DepartamentoInterface[]> {
-    return this.httpClient.get<DepartamentoInterface[]>(this.url);
+  getDepartamentos(fromObject?: any): Observable<Page<DepartamentoInterface>> {
+    const params = new HttpParams({ fromObject })
+    const data = this.httpClient.get<Page<DepartamentoInterface>>(this.url, { params });
+    return data;
   }
 
   excluir(id: number): Observable<Object> {
@@ -31,7 +34,7 @@ export class DepartamentoService {
   }
 
   private atualizar(departamento: DepartamentoInterface) {
-    return this.httpClient.put(`${this.url}/${departamento.id}`, departamento);
+    return this.httpClient.patch(`${this.url}/${departamento.id}`, departamento);
   }
 
   salvar(departamento: DepartamentoInterface) {

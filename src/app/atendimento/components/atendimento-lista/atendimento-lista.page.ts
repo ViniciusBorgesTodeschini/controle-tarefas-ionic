@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, InfiniteScrollCustomEvent } from '@ionic/angular';
 import { AtendimentoInterface } from '../../types/atendimento.interface';
 import { AtendimentoService } from '../../services/atendimento.service';
 import { AtendimentoAssuntoInterface } from '../../atendimento-assunto/types/atendimento-assunto.interface';
 import { AlertService } from 'src/app/core/services/alert.service';
+import { Page } from 'src/app/common/types/types';
 
 @Component({
   selector: 'app-atendimento',
@@ -13,6 +14,12 @@ import { AlertService } from 'src/app/core/services/alert.service';
 export class AtendimentoPage implements OnInit {
   atendimentos: AtendimentoInterface[] = [];
   assunto: AtendimentoAssuntoInterface = {} as AtendimentoAssuntoInterface;
+  page: Page<AtendimentoInterface> = {
+    list: [],
+    page: 1,
+    rpp: 10,
+    totalCount: 0
+  };
 
   constructor(
     private alertController: AlertController,
@@ -42,13 +49,38 @@ export class AtendimentoPage implements OnInit {
    listar() {
     this.atendimentoService.getAtendimentos().subscribe(
         (dados) => {
-          this.atendimentos = dados;
+          console.log(dados);
+          this.page = dados;
+          this.atendimentos = dados.list;
         },
         (erro) => {
           console.error(erro);
           this.alertService.error('Erro ao carregar listagem de atendimentos');
         }
     );
+  }
+
+  changePage() {
+    const params = {
+      page: this.page.page + 1,
+      rpp: 10
+    }
+    this.atendimentoService.getAtendimentos(params).subscribe(
+      (dados) => {
+        this.page = dados;
+        this.atendimentos.push(...dados.list);
+      },
+      (erro) => {
+        console.error(erro);
+      }
+    )
+  }
+
+  paginate(ev: any) {
+    setTimeout(() => {
+      this.changePage();
+      (ev as InfiniteScrollCustomEvent).target.complete();
+    }, 1000);
   }
 
   confirmarExclusao(atendimento: AtendimentoInterface) {

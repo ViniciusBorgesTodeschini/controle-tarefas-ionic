@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PessoaInterface } from '../types/pessoa.interface';
+import { Page } from 'src/app/common/types/types';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,10 @@ export class PessoaService {
     private httpClient: HttpClient
   ) {}
 
-  getPessoas(): Observable<PessoaInterface[]> {
-    return this.httpClient.get<PessoaInterface[]>(this.url);
+  getPessoas(fromObject?: any): Observable<Page<PessoaInterface>> {
+    const params = new HttpParams({ fromObject })
+    const data = this.httpClient.get<Page<PessoaInterface>>(this.url, { params });
+    return data;
   }
 
   excluir(id: number): Observable<Object> {
@@ -31,7 +34,7 @@ export class PessoaService {
   }
 
   private atualizar(pessoa: PessoaInterface) {
-    return this.httpClient.put(`${this.url}/${pessoa.id}`, pessoa);
+    return this.httpClient.patch(`${this.url}/${pessoa.id}`, pessoa);
   }
 
   salvar(pessoa: PessoaInterface) {

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, InfiniteScrollCustomEvent } from '@ionic/angular';
 import { AtendimentoMeioInterface } from '../../types/atendimento-meio.interface';
 import { AtendimentoMeioService } from '../../services/atendimento-meio.service';
 import { AlertService } from 'src/app/core/services/alert.service';
+import { Page } from 'src/app/common/types/types';
 
 @Component({
   selector: 'app-atendimento-meio',
@@ -11,6 +12,12 @@ import { AlertService } from 'src/app/core/services/alert.service';
 })
 export class AtendimentoMeioPage implements OnInit {
   meios: AtendimentoMeioInterface[] = [];
+  page: Page<AtendimentoMeioInterface> = {
+    list: [],
+    page: 1,
+    rpp: 10,
+    totalCount: 0
+  };
 
   constructor(
     private alertController: AlertController,
@@ -40,13 +47,37 @@ export class AtendimentoMeioPage implements OnInit {
   listar() {
     this.atendimentoMeioService.getAtendimentosMeios().subscribe(
       (dados) => {
-        this.meios = dados;
+        this.page = dados;
+        this.meios = dados.list;
       },
       (erro) => {
         console.error(erro);
         this.alertService.error('Erro ao carregar listagem de meio de atendimento');
       }
     );
+  }
+
+  changePage() {
+    const params = {
+      page: this.page.page + 1,
+      rpp: 10
+    }
+    this.atendimentoMeioService.getAtendimentosMeios(params).subscribe(
+      (dados) => {
+        this.page = dados;
+        this.meios.push(...dados.list);
+      },
+      (erro) => {
+        console.error(erro);
+      }
+    )
+  }
+
+  paginate(ev: any) {
+    setTimeout(() => {
+      this.changePage();
+      (ev as InfiniteScrollCustomEvent).target.complete();
+    }, 1000);
   }
 
   confirmarExclusao(meio: AtendimentoMeioInterface) {

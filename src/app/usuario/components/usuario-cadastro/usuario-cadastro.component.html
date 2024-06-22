@@ -76,7 +76,7 @@
         <ion-select
           id="pessoa"
           placeholder="informe a pessoa referente ao usuário..."
-          formControlName="pessoa"
+          formControlName="pessoaId"
           interface="popover"
           [value]="selectedPessoa.id"
         >
@@ -91,10 +91,10 @@
 
     <div class="input-item--container">
       <ion-item lines="none">
-        <ion-checkbox color="success"  formControlName="ativo">O usuário está ativo?</ion-checkbox>     
+        <ion-checkbox color="success"  formControlName="ativo">O usuário está ativo?</ion-checkbox>
       </ion-item>
       <ion-item lines="none">
-        <ion-checkbox color="success" formControlName="administrador">O usuário é um administrador?</ion-checkbox> 
+        <ion-checkbox color="success" formControlName="administrador">O usuário é um administrador?</ion-checkbox>
       </ion-item>
     </div>
 

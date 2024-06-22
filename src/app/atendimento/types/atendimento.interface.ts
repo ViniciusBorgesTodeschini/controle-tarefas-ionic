@@ -11,5 +11,5 @@ export interface AtendimentoInterface {
   fimAtendimento: Date;
   meio: AtendimentoMeioInterface;
   solicitante: PessoaInterface;
-  atendente: UsuarioInterface;
+  usuario: UsuarioInterface;
 }

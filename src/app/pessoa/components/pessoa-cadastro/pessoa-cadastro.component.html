@@ -107,7 +107,7 @@
           id="cidade"
           placeholder="informe a cidade..."
           interface="popover"
-          formControlName="cidade"
+          formControlName="cidadeId"
           [value]="selectedCidade.id"
         >
           <ion-select-option *ngFor="let cidade of cidades" [value]="cidade.id">{{
@@ -119,10 +119,10 @@
 
     <div class="input-item--container">
       <ion-item lines="none">
-        <ion-checkbox color="success"  formControlName="ativo">A pessoa está ativa?</ion-checkbox>     
+        <ion-checkbox color="success"  formControlName="ativo">A pessoa está ativa?</ion-checkbox>
       </ion-item>
       <ion-item lines="none">
-        <ion-checkbox color="success" formControlName="cliente">A pessoa é um cliente?</ion-checkbox> 
+        <ion-checkbox color="success" formControlName="cliente">A pessoa é um cliente?</ion-checkbox>
       </ion-item>
     </div>
 
@@ -133,7 +133,7 @@
           id="departamento"
           placeholder="informe o departamento..."
           interface="popover"
-          formControlName="departamento"
+          formControlName="departamentoId"
           [value]="selectedDepartamento?.id"
         >
           <ion-select-option *ngFor="let departamento of departamentos" [value]="departamento.id">{{
@@ -150,7 +150,7 @@
           id="pessoa"
           placeholder="informe a pessoa..."
           interface="popover"
-          formControlName="pessoa"
+          formControlName="pessoaId"
           [value]="selectedPessoa?.id"
         >
           <ion-select-option *ngFor="let pessoa of pessoas" [value]="pessoa.id">{{

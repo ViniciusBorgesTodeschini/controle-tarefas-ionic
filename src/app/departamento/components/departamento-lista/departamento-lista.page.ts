@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, InfiniteScrollCustomEvent } from '@ionic/angular';
 import { DepartamentoInterface } from '../../types/departamento.interface';
 import { DepartamentoService } from '../../services/departamento.service';
 import { AlertService } from 'src/app/core/services/alert.service';
+import { Page } from 'src/app/common/types/types';
 
 @Component({
   selector: 'app-departamento',
@@ -11,6 +12,12 @@ import { AlertService } from 'src/app/core/services/alert.service';
 })
 export class DepartamentoPage implements OnInit {
   departamentos: DepartamentoInterface[] = [];
+  page: Page<DepartamentoInterface> = {
+    list: [],
+    page: 1,
+    rpp: 10,
+    totalCount: 0
+  };
 
   constructor(
     private alertController: AlertController,
@@ -40,13 +47,37 @@ export class DepartamentoPage implements OnInit {
   listar() {
     this.departamentoService.getDepartamentos().subscribe(
       (dados) => {
-        this.departamentos = dados;
+        this.page = dados;
+        this.departamentos = dados.list;
       },
       (erro) => {
         console.error(erro);
         this.alertService.error('Erro ao carregar listagem de departamentos');
       }
     );
+  }
+
+  changePage() {
+    const params = {
+      page: this.page.page + 1,
+      rpp: 10
+    }
+    this.departamentoService.getDepartamentos(params).subscribe(
+      (dados) => {
+        this.page = dados;
+        this.departamentos.push(...dados.list);
+      },
+      (erro) => {
+        console.error(erro);
+      }
+    )
+  }
+
+  paginate(ev: any) {
+    setTimeout(() => {
+      this.changePage();
+      (ev as InfiniteScrollCustomEvent).target.complete();
+    }, 1000);
   }
 
   confirmarExclusao(departamento: DepartamentoInterface) {

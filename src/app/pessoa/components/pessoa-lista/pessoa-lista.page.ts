@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, InfiniteScrollCustomEvent } from '@ionic/angular';
 import { PessoaInterface } from '../../types/pessoa.interface';
 import { PessoaService } from '../../services/pessoa.service';
 import { AlertService } from 'src/app/core/services/alert.service';
+import { Page } from 'src/app/common/types/types';
 
 @Component({
   selector: 'app-pessoa',
@@ -11,6 +12,12 @@ import { AlertService } from 'src/app/core/services/alert.service';
 })
 export class PessoaPage implements OnInit {
   pessoas: PessoaInterface[] = [];
+  page: Page<PessoaInterface> = {
+    list: [],
+    page: 1,
+    rpp: 10,
+    totalCount: 0
+  };
 
   constructor(
     private alertController: AlertController,
@@ -40,13 +47,37 @@ export class PessoaPage implements OnInit {
   listar() {
     this.pessoaService.getPessoas().subscribe(
       (dados) => {
-        this.pessoas = dados;
+        this.page = dados
+        this.pessoas = dados.list;
       },
       (erro) => {
         console.error(erro);
         this.alertService.error('Erro ao carregar listagem de pessoas');
       }
     );
+  }
+
+  changePage() {
+    const params = {
+      page: this.page.page + 1,
+      rpp: 10
+    }
+    this.pessoaService.getPessoas(params).subscribe(
+      (dados) => {
+        this.page = dados;
+        this.pessoas.push(...dados.list);
+      },
+      (erro) => {
+        console.error(erro);
+      }
+    )
+  }
+
+  paginate(ev: any) {
+    setTimeout(() => {
+      this.changePage();
+      (ev as InfiniteScrollCustomEvent).target.complete();
+    }, 1000);
   }
 
   confirmarExclusao(pessoa: PessoaInterface) {

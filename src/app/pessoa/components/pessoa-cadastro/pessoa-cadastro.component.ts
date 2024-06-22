@@ -10,6 +10,7 @@ import { DepartamentoInterface } from 'src/app/departamento/types/departamento.i
 import { DepartamentoService } from 'src/app/departamento/services/departamento.service';
 import { Subscription } from 'rxjs';
 import { AlertService } from 'src/app/core/services/alert.service';
+import { Page } from 'src/app/common/types/types';
 
 @Component({
   selector: 'app-pessoa-cadastro',
@@ -26,6 +27,7 @@ export class PessoaCadastroComponent implements OnInit, OnDestroy {
   selectedPessoa: PessoaInterface | null = {} as PessoaInterface;
   selectedDepartamento: DepartamentoInterface | null = {} as DepartamentoInterface;
   selectedCidade: CidadeInterface = {} as CidadeInterface;
+
 
   private subscriptions = new Subscription();
 
@@ -70,7 +72,7 @@ export class PessoaCadastroComponent implements OnInit, OnDestroy {
   getCidades() {
     this.cidadeService.getCidades().subscribe(
       (dados) => {
-        this.cidades = dados;
+        this.cidades = dados.list;
       },
       (erro) => {
         console.error(erro);
@@ -82,10 +84,10 @@ export class PessoaCadastroComponent implements OnInit, OnDestroy {
   getDepartamentos() {
     this.departamentoService.getDepartamentos().subscribe(
       (dados) => {
-        this.departamentos = dados;
-        this.alertService.error('Não foi possível carregar os departamentos. Tente novamente mais tarde')
+        this.departamentos = dados.list;
       },
       (erro) => {
+        this.alertService.error('Não foi possível carregar os departamentos. Tente novamente mais tarde')
         console.error(erro);
       }
     );
@@ -94,7 +96,7 @@ export class PessoaCadastroComponent implements OnInit, OnDestroy {
   getPessoas() {
     this.pessoaService.getPessoas().subscribe(
       (dados) => {
-        this.pessoas = dados;
+        this.pessoas = dados.list;
       },
       (erro) => {
         console.error(erro);
@@ -135,14 +137,14 @@ export class PessoaCadastroComponent implements OnInit, OnDestroy {
         pessoa?.cliente,
         Validators.required
       ),
-      cidade: new FormControl(
+      cidadeId: new FormControl(
         pessoa?.cidade,
         Validators.required
       ),
-      departamento: new FormControl(
+      departamentoId: new FormControl(
         pessoa?.departamento
       ),
-      pessoa: new FormControl(
+      pessoaId: new FormControl(
         pessoa?.pessoa
       )
     });
@@ -153,6 +155,7 @@ export class PessoaCadastroComponent implements OnInit, OnDestroy {
       ...this.pessoaForm.value,
       id: this.pessoaId,
     };
+    console.log(pessoa);
     this.pessoaService.salvar(pessoa).subscribe(
       () => this.router.navigate(['pessoa']),
       (erro) => {
