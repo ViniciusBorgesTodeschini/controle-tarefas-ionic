@@ -17,7 +17,7 @@
           id="atendente"
           placeholder="informe o atendente do atendimento..."
           interface="popover"
-          formControlName="atendente"
+          formControlName="usuarioId"
           [value]="selectedAtendente?.id"
         >
           <ion-select-option
@@ -36,7 +36,7 @@
           id="meio"
           placeholder="informe o solicitante do atendimento..."
           interface="popover"
-          formControlName="solicitante"
+          formControlName="solicitanteId"
           [value]="selectedSolicitante?.id"
         >
           <ion-select-option
@@ -46,7 +46,7 @@
           >
         </ion-select>
       </ion-item>
-    </div>    
+    </div>
 
     <div class="input-item--container">
       <ion-label class="input-label">Assunto:</ion-label>
@@ -55,7 +55,7 @@
           id="assunto"
           placeholder="informe o assunto do atendimento..."
           interface="popover"
-          formControlName="assunto"
+          formControlName="assuntoId"
           [value]="selectedAssunto.id"
           (ionChange)="selectChange($event)"
         >
@@ -75,7 +75,7 @@
           id="meio"
           placeholder="informe o meio do atendimento..."
           interface="popover"
-          formControlName="meio"
+          formControlName="meioId"
           [value]="selectedMeio.id"
         >
           <ion-select-option *ngFor="let meio of meios" [value]="meio.id">{{
@@ -83,7 +83,7 @@
           }}</ion-select-option>
         </ion-select>
       </ion-item>
-    </div>    
+    </div>
 
     <div class="input-item--container">
       <ion-label class="input-label">Inicio do atendimento:</ion-label>
@@ -99,7 +99,7 @@
 
       <small *ngIf="atendimentoForm.get('inicioAtendimento')?.errors?.['dataInvalida']">
         A data não pode ser maior que a data atual
-      </small>      
+      </small>
     </div>
 
     <div class="input-item--container">
@@ -116,7 +116,7 @@
 
       <small *ngIf="atendimentoForm.get('fimAtendimento')?.errors?.['dataInvalida']">
         A data não pode ser maior que a data atual
-      </small>      
+      </small>
     </div>
 
     <div class="input-item--container">

@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AtendimentoMeioInterface } from '../types/atendimento-meio.interface';
+import { Page } from 'src/app/common/types/types';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,11 @@ export class AtendimentoMeioService {
     private httpClient: HttpClient
   ) {}
 
-  getAtendimentosMeios(): Observable<AtendimentoMeioInterface[]> {
-    return this.httpClient.get<AtendimentoMeioInterface[]>(this.url);
+  getAtendimentosMeios(fromObject?: any): Observable<Page<AtendimentoMeioInterface>> {
+
+    const params = new HttpParams({ fromObject })
+    const data = this.httpClient.get<Page<AtendimentoMeioInterface>>(this.url, { params });
+    return data;
   }
 
   excluir(id: number): Observable<Object> {
@@ -31,7 +35,7 @@ export class AtendimentoMeioService {
   }
 
   private atualizar(atendimentoMeio: AtendimentoMeioInterface) {
-    return this.httpClient.put(`${this.url}/${atendimentoMeio.id}`, atendimentoMeio);
+    return this.httpClient.patch(`${this.url}/${atendimentoMeio.id}`, atendimentoMeio);
   }
 
   salvar(atendimentoMeio: AtendimentoMeioInterface) {

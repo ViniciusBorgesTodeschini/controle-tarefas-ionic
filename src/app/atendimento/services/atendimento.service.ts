@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AtendimentoInterface } from '../types/atendimento.interface';
+import { Page } from 'src/app/common/types/types';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,11 @@ export class AtendimentoService {
     private httpClient: HttpClient
   ) {}
 
-  getAtendimentos(): Observable<AtendimentoInterface[]> {
-    return this.httpClient.get<AtendimentoInterface[]>(this.url);
+  getAtendimentos(fromObject?: any): Observable<Page<AtendimentoInterface>> {
+
+    const params = new HttpParams({ fromObject })
+    const data = this.httpClient.get<Page<AtendimentoInterface>>(this.url, { params });
+    return data;
   }
 
   excluir(id: number): Observable<Object> {
@@ -31,7 +35,7 @@ export class AtendimentoService {
   }
 
   private atualizar(atendimento: AtendimentoInterface) {
-    return this.httpClient.put(`${this.url}/${atendimento.id}`, atendimento);
+    return this.httpClient.patch(`${this.url}/${atendimento.id}`, atendimento);
   }
 
   salvar(atendimento: AtendimentoInterface) {

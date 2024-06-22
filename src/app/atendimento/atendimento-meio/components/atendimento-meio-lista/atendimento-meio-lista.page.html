@@ -9,12 +9,6 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <search-input
-    url="atendimento-meio"
-    propriedade="nome"
-    (afterLoad)="setMeios($event)"
-  ></search-input>
-  <ion-item-divider></ion-item-divider>
   <ion-list lines="none">
     <div>
       <ion-item *ngFor="let meio of meios">
@@ -44,6 +38,9 @@
           </ion-buttons>
         </ion-card>
       </ion-item>
+      <ion-infinite-scroll (ionInfinite)="paginate($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
     </div>
   </ion-list>
 

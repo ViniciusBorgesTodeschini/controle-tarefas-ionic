@@ -61,7 +61,7 @@ export class AtendimentoCadastroComponent implements OnInit, OnDestroy {
           this.selectedAssunto = atendimento.assunto;
           this.selectedMeio = atendimento.meio;
           this.selectedSolicitante = atendimento.solicitante;
-          this.selectedAtendente = atendimento.atendente;
+          this.selectedAtendente = atendimento.usuario;
           this.atendimentoForm = this.createForm(atendimento);
         }, (error) => {
           this.alertService.error('Não foi possível carregar os dados do atendimento!')
@@ -90,7 +90,7 @@ export class AtendimentoCadastroComponent implements OnInit, OnDestroy {
   getMeios() {
     this.atendimentoMeioService.getAtendimentosMeios().subscribe(
       (dados) => {
-        this.meios = dados;
+        this.meios = dados.list;
       },
       (erro) => {
         console.error(erro);
@@ -102,7 +102,7 @@ export class AtendimentoCadastroComponent implements OnInit, OnDestroy {
   getSolicitantes() {
     this.pessoaService.getPessoas().subscribe(
       (dados) => {
-        this.solicitantes = dados;
+        this.solicitantes = dados.list;
       },
       (erro) => {
         console.error(erro);
@@ -114,7 +114,7 @@ export class AtendimentoCadastroComponent implements OnInit, OnDestroy {
   getAtendentes() {
     this.usuarioService.getUsuarios().subscribe(
       (dados) => {
-        this.atendentes = dados;
+        this.atendentes = dados.list;
       },
       (erro) => {
         console.error(erro);
@@ -138,12 +138,13 @@ export class AtendimentoCadastroComponent implements OnInit, OnDestroy {
         Validators.minLength(1),
         Validators.maxLength(500),
       ]),
-      assunto: new FormControl(
-        atendimento?.assunto || true,
-        Validators.required
+      assuntoId: new FormControl(
+        atendimento?.assunto?.id || atendimento?.assunto || null,[
+          Validators.required
+        ]
       ),
-      meio: new FormControl(
-        atendimento?.meio || null,
+      meioId: new FormControl(
+        atendimento?.meio?.id || atendimento?.meio || null,
         Validators.required
       ),
       inicioAtendimento: new FormControl(
@@ -154,12 +155,12 @@ export class AtendimentoCadastroComponent implements OnInit, OnDestroy {
         atendimento?.fimAtendimento || null,
         this.dataAtualValidator
       ),
-      solicitante: new FormControl(
-        atendimento?.solicitante || null,
+      solicitanteId: new FormControl(
+        atendimento?.solicitante?.id ||atendimento?.solicitante || null,
         Validators.required
       ),
-      atendente: new FormControl(
-        atendimento?.atendente || null,
+      usuarioId: new FormControl(
+        atendimento?.usuario.id || atendimento?.usuario || null,
         Validators.required
       )
     });
@@ -170,7 +171,7 @@ export class AtendimentoCadastroComponent implements OnInit, OnDestroy {
       ...this.atendimentoForm.value,
       id: this.atendimentoId,
     };
-    atendimento.assunto = this.assunto;
+
     this.atendimentoService.salvar(atendimento).subscribe(
       () => this.router.navigate(['atendimento']),
       (erro) => {

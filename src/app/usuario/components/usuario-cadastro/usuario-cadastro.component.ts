@@ -57,7 +57,7 @@ export class UsuarioCadastroComponent implements OnInit, OnDestroy {
   private getPessoas(): void {
     this.pessoaService.getPessoas().subscribe(
       (dados) => {
-        this.pessoas = Object.values(dados);
+        this.pessoas = Object.values(dados.list);
       },
       (erro) => {
         console.error(erro);
@@ -78,7 +78,7 @@ export class UsuarioCadastroComponent implements OnInit, OnDestroy {
         Validators.minLength(3),
         Validators.maxLength(150),
       ]),
-      pessoa: new FormControl(
+      pessoaId: new FormControl(
         usuario?.pessoa
       ),
       dataCadastro: new FormControl(

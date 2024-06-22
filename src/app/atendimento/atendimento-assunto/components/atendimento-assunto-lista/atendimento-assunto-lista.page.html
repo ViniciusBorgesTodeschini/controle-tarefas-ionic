@@ -6,8 +6,6 @@
 </ion-header>
 
 <ion-content>
-  <search-input url="atendimento-assunto" propriedade="nome" (afterLoad)="setAssuntos($event)"></search-input>
-  <ion-item-divider></ion-item-divider>
   <ion-list lines="none">
     <div>
       <ion-item *ngFor="let assunto of assuntos">
